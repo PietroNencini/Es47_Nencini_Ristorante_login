@@ -4,7 +4,7 @@
 	$servernameDB = "localhost";
 	$usernameDB = "root";
 	$passwordDB = "";     // Di default quando si installa XAMPP la password è vuota
-	$dbnameDB = "db_name"; // Qui bisogna cambiare con il nome del database presente su phpMyAdmin
+	$dbnameDB = "ristorante_recensioni"; // Qui bisogna cambiare con il nome del database presente su phpMyAdmin
 
 	mysqli_report(MYSQLI_REPORT_OFF);   // Serve a disabilitare le eccezioni nelle nuove versioni di PHP
 
