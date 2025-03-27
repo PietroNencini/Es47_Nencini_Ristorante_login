@@ -24,7 +24,7 @@
 
         <header class="d-flex align-items-center justify-content-center bg-warning">
             <span><img id="icon" src="../images/logo.png" alt="risto&rece" width=96px" class="d-block mx-auto"></span>
-            <h1 id="home_title" class="jaini text-center"> RISTO&RECE </h1>
+            <h1 class="home_title jaini text-center"> RISTO&RECE </h1>
         </header>
         
         <div id="results_container" class="my-5 border border-1 border-black rounded-4 p-3 mx-auto w-75 bg-secondary-subtle shadow-lg">
@@ -32,6 +32,29 @@
             <hr>
             <p class="text-center fs-4 "><?php echo "Benvenuto <span class='fw-bold'>" . $_SESSION["session_user"] . "</span>"?> </p>
             <hr>
+
+            <div id="info_container">
+                <ul>
+                    <?php 
+                        include "connection.php";
+                        $query = "SELECT * FROM utente";
+                        
+                        if($result = $conn->query($query)) {
+                            
+                            while($row= $result->fetch_assoc()) {
+                                
+                                foreach($row as $value) {
+                                    
+                                }
+
+                            }
+
+                        }
+                    ?>
+                </ul>
+            </div>
+
+
             <form action="logout_script.php" method="post">
                 <button type="submit" class="btn btn-danger fw-bold fs-5 d-block mx-auto"> LOGOUT </button>
             </form>

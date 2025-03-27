@@ -11,7 +11,7 @@ body {
     font-style: normal;
   }
 
-#home_title {
+h1.home_title {
     font-size: 4rem;
 }
 
@@ -59,7 +59,7 @@ input.form_input:active {
         width: 64px;
     }
 
-    #home_title {
+    h1.home_title {
         font-size: xx-large;
     }
 

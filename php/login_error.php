@@ -7,6 +7,8 @@
     if(isset($_SESSION["session_user"])) {
         unset($_SESSION["session_user"]);
     }
+
+    session_destroy();
 ?>
 
 <!DOCTYPE html>
@@ -36,6 +38,10 @@
                         case 3:
                             echo "Errore nella richiesta, ci scusiamo per il problema";
                             break;
+                        case 4:
+                            echo "Nome utente già in uso, prova con un altro";
+                        case 5:
+                            echo "Indirizzo email già in uso, non fare il furbo!";
                         default:
                             echo "Errore sconosciuto";
                     }

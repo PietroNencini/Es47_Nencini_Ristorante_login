@@ -20,7 +20,7 @@
         while($row = $result->fetch_assoc()) {                                  //? CONTROLLO 2: Iterazione sui record per verificare l'esistenza dell'utente           
             if($row["username"] == $form_username) {
                 $user_found = true;
-                if($row["passwrd"] == $form_password) {
+                if($row["passwrd"] == hash("sha256" , $form_password)) {
                     $_SESSION["session_user"] = $form_username;
                     $_SESSION["error_code"] = 0;
                     header("Location: welcome.php");
