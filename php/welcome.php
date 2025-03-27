@@ -22,14 +22,16 @@
     </head>
     <body>
 
-        <div class="bg-warning">
-            <span><img src="../images/logo.png" alt="risto&rece" width="5%" class="d-block mx-auto"></span>
+        <header class="d-flex align-items-center justify-content-center bg-warning">
+            <span><img id="icon" src="../images/logo.png" alt="risto&rece" width=96px" class="d-block mx-auto"></span>
             <h1 id="home_title" class="jaini text-center"> RISTO&RECE </h1>
-        </div>
+        </header>
         
         <div id="results_container" class="my-5 border border-1 border-black rounded-4 p-3 mx-auto w-75 bg-secondary-subtle shadow-lg">
-            <h3 class="bg-success text-center p-3 w-25 mx-auto rounded-3 text-white"> ACCESSO EFFETTUATO </h3>
+            <h3 class="text-center p-3 w-25 mx-auto rounded-3 text-white"> ACCESSO EFFETTUATO </h3>
+            <hr>
             <p class="text-center fs-4 "><?php echo "Benvenuto <span class='fw-bold'>" . $_SESSION["session_user"] . "</span>"?> </p>
+            <hr>
             <form action="logout_script.php" method="post">
                 <button type="submit" class="btn btn-danger fw-bold fs-5 d-block mx-auto"> LOGOUT </button>
             </form>

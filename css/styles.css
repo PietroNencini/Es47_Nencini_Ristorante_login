@@ -38,3 +38,36 @@ input.form_input:active {
     margin-top: 2rem !important;
     margin-bottom: 2rem !important;
 }
+
+#results_container > h3 {
+    background-color: rgba(25, 135, 84, 0.5);
+}
+
+@media only screen and (max-width: 576px) {
+    #form_inside {
+        border: none !important;
+        width:100% !important;
+    }
+    
+    #login_form * {
+        font-size: larger;
+        text-align: center !important;
+        width: 100% !important;
+    }
+
+    #icon {
+        width: 64px;
+    }
+
+    #home_title {
+        font-size: xx-large;
+    }
+
+    #login_form button[type="submit"] {
+        margin-top: 3rem !important;
+    }
+
+    #results_container *, #logout_container * {
+        width: 100% !important;
+    }
+}
