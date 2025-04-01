@@ -71,3 +71,8 @@ input.form_input:active {
         width: 100% !important;
     }
 }
+
+#user_info  li {
+    margin-top: 0.2rem !important;
+    margin-bottom: 0.2rem !important;
+}

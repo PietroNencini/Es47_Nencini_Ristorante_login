@@ -40,8 +40,10 @@
                             break;
                         case 4:
                             echo "Nome utente già in uso, prova con un altro";
+                            break;
                         case 5:
                             echo "Indirizzo email già in uso, non fare il furbo!";
+                            break;
                         default:
                             echo "Errore sconosciuto";
                     }
