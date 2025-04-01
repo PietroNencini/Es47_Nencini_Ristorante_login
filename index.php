@@ -1,3 +1,8 @@
+<?php
+    session_start();
+
+?>
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -21,7 +26,7 @@
     <div id="home_form_container" class="w-75 mx-auto bg-white p-4 mt-4">
 
         <div id="form_inside" class="w-50 border border-1 border-black rounded-3 p-3 mx-auto my-5">
-            <form id="login_form" action="php/login_script.php" method="post">
+            <form id="login_form" action="php/scripts/login_script.php" method="post">
                 <label for="username" class="form-label">Nome utente</label>
                 <input type="text" name="username" id="username" class="form_input form-control" minlength="4" required>
 
@@ -30,7 +35,28 @@
             
                 <button type="submit" class="btn btn-warning fw-bold"> ACCEDI </button>
             </form>
-            <p> Non hai un account? <a href="./pages/registration.html"> Registrati ora </a> </p>
+
+            <?php 
+                if (isset($_SESSION["error_code"])) {
+                    
+                    switch($_SESSION["error_code"]) {
+                        case 1:
+                            $output = "Utente non trovato";
+                            break;
+                        case 2:
+                            $output = "Password errata";
+                            break;
+                        default:
+                            $output = "BOH";
+                    }
+
+                    echo "<p class='bg-danger text-white fw-bold text-center rounded-3 mt-2 mb-3 fs-5'> ERRORE: $output </p>";
+
+                    unset($_SESSION["error_code"]);
+                }
+            ?>
+
+            <p> Non hai un account? <a href="./php/registration.php"> Registrati ora </a> </p>
         </div>    
     </div>
 

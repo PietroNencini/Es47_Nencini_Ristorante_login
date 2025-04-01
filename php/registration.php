@@ -1,3 +1,10 @@
+<?php
+    session_start();
+
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -23,7 +30,7 @@
         <div id="form_inside" class="w-50 border border-1 border-black rounded-3 p-3 mx-auto my-5">
             <h3 class="text-center"> REGISTRAZIONE NUOVO UTENTE </h3>
             <hr>
-            <form id="login_form" action="../php/registration_script.php" method="post">
+            <form id="login_form" action="./scripts/registration_script.php" method="post">
                 <label for="name" class="form-label"> Nome </label>
                 <input type="text" name="name" id="name" class="form_input form-control" required>
 
@@ -39,9 +46,35 @@
                 <label for="password" class="form-label"> Password</label>
                 <input type="password" name="password" id="password" class="form_input form-control" minlength="8" required>
             
+                <div class="form-check my-3">
+                    <input class="form-check-input" type="radio" name="terms_cond" id="terms_cond1" required>
+                    <label class="form-check-label" for="terms_cond1"> Accetto i termini e le condizioni di &copyRisto&Rece *</label>
+                </div>
                 <button type="submit" class="btn btn-warning fw-bold my-3"> CREA ACCOUNT </button>
             </form>
-            <p> Hai già un profilo? <a href="../index.html"> Accedi </a> </p>
+
+            <?php 
+                if (isset($_SESSION["error_code"])) {
+                    
+                    switch($_SESSION["error_code"]) {
+                        case 4:
+                            $output = "Nome utente già in uso, provane un altro";
+                            break;
+                        case 5:
+                            $output = "Indirizzo email già presente, un fà i'furbo";
+                            break;
+                        default:
+                            $output = "BOH";
+                    }
+
+                    echo "<p class='bg-danger text-white fw-bold text-center rounded-3 my-2 fs-5'> ERRORE: $output </p>";
+
+                    $_SESSION["error_code"] = 0;
+                }
+            ?>
+
+
+            <p> Hai già un profilo? <a href="../index.php"> Accedi </a> </p>
         </div>    
     </div>
 

@@ -8,7 +8,7 @@
     if(!isset($_SESSION["session_user"]))
         $_SESSION["session_user"] = "";
 
-    include "connection.php";
+    include "../connection.php";
 
     $form_username = $_POST["username"];
     $form_password = $_POST["password"];
@@ -23,18 +23,18 @@
                 if($row["passwrd"] == hash(algo: "sha256" , data: $form_password)) {
                     $_SESSION["session_user"] = $form_username;
                     $_SESSION["error_code"] = 0;
-                    header("Location: welcome.php");
+                    header(header: "Location: ../welcome.php");
                 } else {
                     $_SESSION["error_code"] = 2;
-                    header("Location: login_error.php");
+                    header(header: "Location: ../../index.php");
                 }
             }
         }   
         if(!$user_found) {
             $_SESSION["error_code"] = 1;
-            header(header:"Location: login_error.php");
+            header(header:"Location: ../../index.php");
         }
     } else {
         $_SESSION["error_code"] = 3;
-        header(header: "Location: ../pages/error.html");
+        header(header: "Location: ../../pages/error.html");
     }

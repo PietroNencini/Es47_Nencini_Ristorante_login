@@ -5,7 +5,7 @@
         $_SESSION["error_code"] = 0;
     }
     if(!isset($_SESSION["session_user"])) {         //? Nel caso si accedesse a questa pagina senza aver fatto il login
-        header(header: "Location: ../index.html");
+        header(header: "Location: ../index.php");
     }
 
     $logged_user = $_SESSION["session_user"];
@@ -64,8 +64,8 @@
                 <hr>
             </div>
 
-
-            <form action="logout_script.php" method="post">
+            
+            <form action="./scripts/logout_script.php" method="post">
                 <button type="submit" class="btn btn-danger fw-bold fs-5 d-block mx-auto"> LOGOUT </button>
             </form>
         </div>

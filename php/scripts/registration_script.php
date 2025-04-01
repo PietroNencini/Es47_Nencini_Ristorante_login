@@ -2,7 +2,7 @@
 
     session_start();
 
-    include "connection.php";
+    include "../connection.php";
 
     $form_username = $_POST["username"];
     $form_password = $_POST["password"];
@@ -22,11 +22,11 @@
                 
                 if($row["username"] == $form_username) {
                     $_SESSION["error_code"] = 4;
-                    header("Location: login_error.php");
+                    header("Location: ../registraton.php");
                     exit;
                 } else if($row["email"] == $form_email) {
                     $_SESSION["error_code"] = 5;
-                    header("Location: login_error.php");
+                    header("Location: ../registration.php");
                     exit;
                 }
             }    
@@ -34,17 +34,17 @@
                     
                 $_SESSION["error_code"] = 0;
                 $_SESSION["session_user"] = $form_username;
-                header("Location: welcome.php");
+                header("Location: ../welcome.php");
 
             } else {
                 $_SESSION["error_code"] = 3;
-                header("Location: ../pages/error.html");
+                header("Location: ../../pages/error.html");
             }
         }
 
     } else {
         $_SESSION["error_code"] = 3;
-        header("Location: error.html");
+        header("Location: ../../pages/error.html");
     }
 
 
