@@ -10,6 +10,8 @@
 
     $logged_user = $_SESSION["session_user"];
 
+    $log_user_id = "";
+
     $info_list = ["ID:", "USERNAME", "PASSWORD", "NOME:", "COGNOME:", "EMAIL:", "MEMBRO DAL:"];
 ?>
 
@@ -38,7 +40,7 @@
             <p class="text-center fs-4 "><?php echo "Benvenuto <span class='fw-bold'> $logged_user </span>"?> </p>
             <hr>
 
-            <div id="info_container">
+            <div id="info_container" class="w-50 mx-auto">
                 <p class=" fw-bold fs-4 "> Informazioni utente </p>
                 <ul id="user_info">
                     <?php 
@@ -49,6 +51,8 @@
                                 while($row= $result->fetch_assoc()) {
                                     $count = 0;
                                     foreach($row as $value) {
+                                        if($count == 0)
+                                            $log_user_id = $value;
                                         echo "<li>".$info_list[$count]."<b> $value </b></li>";
                                         $count++;
                                     }
@@ -61,10 +65,48 @@
                         }
                     ?>
                 </ul>
-                <hr>
             </div>
-
-            
+            <hr>
+            <div id="reviews_space" class="w-100">
+                <p class="fs-4 text-center"> Recensioni scritte: 
+                    <?php 
+                        $rev_query = "SELECT * FROM utente U INNER JOIN recensione R ON U.id_cliente = R.id_utente WHERE U.username = '$logged_user'";
+                        if($rev_result = $conn->query(query: $rev_query)) {
+                            echo $rev_result->num_rows;
+                        } else {
+                            echo "c'è un problema";
+                        }
+                    ?>
+                </p>
+                <div id="rev_table_container" class="w-50 mx-auto">
+                    <table id="revs_table" class="table border border-warning rounded-3" style="border-radius: 0.3rem !important;">    
+                        <?php
+                            $rev_query = "SELECT RT.nome, RT.indirizzo, RV.voto, RV.data_rec FROM recensione RV INNER JOIN ristorante RT ON RV.cod_risto = RT.codice WHERE RV.id_utente = $log_user_id;";
+                            if($rev_result = $conn->query($rev_query)) {
+                                if($rev_result->num_rows > 0) {
+                                    echo "<tr class='bg-'>";
+                                    while($field = $rev_result->fetch_field()) {
+                                        echo "<th> ".$field->name." </th>";
+                                    }
+                                    echo "</tr>";
+                                    while($row = $rev_result->fetch_assoc()) {
+                                        echo "<tr>";
+                                        foreach($row as $value) {
+                                            echo "<td> $value </td>";
+                                        }
+                                        echo"</tr>";
+                                    }
+                                } else {
+                                    "Non hai ancora scritto recensioni: VERGOGNATI!";
+                                }
+                            } else {
+                                echo "ERRORE";
+                            }
+                        ?>
+                    </table>
+                </div>
+            </div>
+            <hr>
             <form action="./scripts/logout_script.php" method="post">
                 <button type="submit" class="btn btn-danger fw-bold fs-5 d-block mx-auto"> LOGOUT </button>
             </form>

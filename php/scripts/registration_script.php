@@ -22,7 +22,7 @@
                 
                 if($row["username"] == $form_username) {
                     $_SESSION["error_code"] = 4;
-                    header("Location: ../registraton.php");
+                    header("Location: ../registration.php");
                     exit;
                 } else if($row["email"] == $form_email) {
                     $_SESSION["error_code"] = 5;

@@ -1,7 +1,8 @@
 <?php
     session_start();
 
-
+    if(!isset($_SESSION["error_code"])) 
+        $_SESSION["error_code"] = 0;
 
 ?>
 
@@ -55,7 +56,7 @@
 
             <?php 
                 if (isset($_SESSION["error_code"])) {
-                    
+                    $error = true;
                     switch($_SESSION["error_code"]) {
                         case 4:
                             $output = "Nome utente già in uso, provane un altro";
@@ -64,15 +65,13 @@
                             $output = "Indirizzo email già presente, un fà i'furbo";
                             break;
                         default:
-                            $output = "BOH";
+                            $error = false;
                     }
-
-                    echo "<p class='bg-danger text-white fw-bold text-center rounded-3 my-2 fs-5'> ERRORE: $output </p>";
-
+                    if($error)
+                        echo "<p class='bg-danger text-white fw-bold text-center rounded-3 my-2 fs-5'> ERRORE: $output </p>";
                     $_SESSION["error_code"] = 0;
                 }
             ?>
-
 
             <p> Hai già un profilo? <a href="../index.php"> Accedi </a> </p>
         </div>    

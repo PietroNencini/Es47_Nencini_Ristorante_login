@@ -1,6 +1,9 @@
 <?php
     session_start();
 
+    if(!isset($_SESSION["error_code"]))
+        $_SESSION["error_code"] = 0;
+
 ?>
 
 <!DOCTYPE html>
@@ -38,7 +41,7 @@
 
             <?php 
                 if (isset($_SESSION["error_code"])) {
-                    
+                    $error = true;
                     switch($_SESSION["error_code"]) {
                         case 1:
                             $output = "Utente non trovato";
@@ -47,10 +50,10 @@
                             $output = "Password errata";
                             break;
                         default:
-                            $output = "BOH";
+                            $error = false;
                     }
-
-                    echo "<p class='bg-danger text-white fw-bold text-center rounded-3 mt-2 mb-3 fs-5'> ERRORE: $output </p>";
+                    if($error)
+                        echo "<p class='bg-danger text-white fw-bold text-center rounded-3 mt-2 mb-3 fs-5'> ERRORE: $output </p>";
 
                     unset($_SESSION["error_code"]);
                 }
