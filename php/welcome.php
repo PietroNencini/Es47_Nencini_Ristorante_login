@@ -36,8 +36,24 @@
         
         <div id="results_container" class="my-5 border border-1 border-black rounded-4 p-3 mx-auto w-75 bg-secondary-subtle shadow-lg">
             <h3 class="text-center p-3 w-25 mx-auto rounded-3 text-white"> ACCESSO EFFETTUATO </h3>
-            <hr>
-            <p class="text-center fs-4 "><?php echo "Benvenuto <span class='fw-bold'> $logged_user </span>"?> </p>
+            <?php
+                switch($_SESSION["error_code"]) {
+                    case 0:
+                        $output = "<p class='text-center fs-4 '> Benvenuto <span class='fw-bold'> $logged_user </span> </p>";
+                        break;
+                    case -2:
+                        $output = "<p class='text-center fs-4'> Grazie per la tua recensione, <span class='fw-bold'> $logged_user </span> </p>";
+                        break;
+                    case 3:
+                        $output = "<p class='bg-danger text-white fw-bold text-center rounded-3 mt-2 mb-3 fs-5'> ERRORE: impossibie inserire la recensione, controlla i dati e riprova </p>";
+                        break;                        
+                    default:
+                        echo "ERRORE";
+                        exit;
+                }
+                $_SESSION["error_code"] = 0;
+            ?>
+            
             <hr>
 
             <div id="info_container" class="w-50 mx-auto">
@@ -67,43 +83,92 @@
                 </ul>
             </div>
             <hr>
-            <div id="reviews_space" class="w-100">
-                <p class="fs-4 text-center"> Recensioni scritte: 
-                    <?php 
-                        $rev_query = "SELECT * FROM utente U INNER JOIN recensione R ON U.id_cliente = R.id_utente WHERE U.username = '$logged_user'";
-                        if($rev_result = $conn->query(query: $rev_query)) {
-                            echo $rev_result->num_rows;
-                        } else {
-                            echo "c'è un problema";
-                        }
-                    ?>
-                </p>
-                <div id="rev_table_container" class="w-50 mx-auto">
-                    <table id="revs_table" class="table border border-warning rounded-3" style="border-radius: 0.3rem !important;">    
-                        <?php
-                            $rev_query = "SELECT RT.nome, RT.indirizzo, RV.voto, RV.data_rec FROM recensione RV INNER JOIN ristorante RT ON RV.cod_risto = RT.codice WHERE RV.id_utente = $log_user_id;";
-                            if($rev_result = $conn->query($rev_query)) {
-                                if($rev_result->num_rows > 0) {
-                                    echo "<tr class='bg-'>";
-                                    while($field = $rev_result->fetch_field()) {
-                                        echo "<th> ".$field->name." </th>";
-                                    }
-                                    echo "</tr>";
-                                    while($row = $rev_result->fetch_assoc()) {
-                                        echo "<tr>";
-                                        foreach($row as $value) {
-                                            echo "<td> $value </td>";
+            <div id="reviews_space">
+                <div class="row">
+                    <div class="col col-sm-6">
+                        <div id="rev_table_container" class="w-100 mx-auto px-5">
+                            <table id="revs_table" class="table table-bordered border-warning rounded-3" style="border-radius: 0.3rem !important;">    
+                                <?php
+                                    $rev_query = "SELECT RT.nome, RT.indirizzo, RV.voto, RV.data_rec FROM recensione RV INNER JOIN ristorante RT ON RV.cod_risto = RT.codice WHERE RV.id_utente = $log_user_id;";
+                                    if($rev_result = $conn->query(query: $rev_query)) {
+                                        if($rev_result->num_rows > 0) {
+                                            echo "<thead class='table-light'> <tr class='table-warning-subtle'>";
+                                            while($field = $rev_result->fetch_field()) {
+                                                echo "<th> $field->name </th>";
+                                            }
+                                            echo "</tr> </thead> <tbody>";
+                                            while($row = $rev_result->fetch_assoc()) {
+                                                echo "<tr>";
+                                                foreach($row as $value) {
+                                                    echo "<td> $value </td>";
+                                                }
+                                                echo"</tr> </tbody>";
+                                            }
+                                        } else {
+                                            "Non hai ancora scritto recensioni: VERGOGNATI!";
                                         }
-                                        echo"</tr>";
+                                    } else {
+                                        echo "ERRORE";
                                     }
+                                ?>
+                            </table>
+                        </div>
+                        <p class="fs-4 text-center mt-4"> Recensioni totali: 
+                            <?php 
+                                $rev_query = "SELECT * FROM utente U INNER JOIN recensione R ON U.id_cliente = R.id_utente WHERE U.username = '$logged_user'";
+                                if($rev_result = $conn->query(query: $rev_query)) {
+                                    echo $rev_result->num_rows;
                                 } else {
-                                    "Non hai ancora scritto recensioni: VERGOGNATI!";
+                                    echo "c'è un problema";
                                 }
-                            } else {
-                                echo "ERRORE";
-                            }
-                        ?>
-                    </table>
+                            ?>
+                        </p>
+                    </div>
+                    <div class="col col-sm-6">
+                        <aside class="px-4 bg-white rounded-5">
+                            <p for="#" class="text-center"> Vuoi aggiungere una recensione ?</p>
+                            <form id="review_form" action="./scripts/review_insert_script.php" method="post">
+                                <label for="restaurant" class="form-label"> Ristorante: </label>
+                                <select name="restaurant" class="form-select">
+                                    <?php 
+                                        if($result = $conn->query(query: "SELECT codice AS id, nome FROM ristorante")) {
+                                            if($result->num_rows) {
+                                                while($row = $result->fetch_assoc()) {
+                                                    echo "<option value='".$row["id"]."'> ".$row["nome"]." </option>";
+                                                }
+                                            } else {
+                                                echo "<option value='not_available'> Nessun ristorante disponibile </option>";
+                                            }
+                                        } else {
+                                            echo "ERRORE: Impossibile trovare ristoranti";
+                                        }
+                                    ?>
+                                </select>
+                                <label for="#"> Valutazione </label>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" name="vote" value="1" class="form-check-input" id="vote-1">
+                                    <label for="vote-1" class="form-check-label"> 1 </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" name="vote" value="2" class="form-check-input" id="vote-3">
+                                    <label for="vote-1" class="form-check-label"> 2 </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" name="vote" value="3" class="form-check-input" id="vote-3" checked>
+                                    <label for="vote-3" class="form-check-label"> 3 </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" name="vote" value="4" class="form-check-input" id="vote-4">
+                                    <label for="vote-4" class="form-check-label"> 4 </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" name="vote" value="5" class="form-check-input" id="vote-5">
+                                    <label for="vote-5" class="form-check-label"> 5 </label>
+                                </div>
+                                <button type="submit" class="btn text-white fw-bold d-block mx-auto" style="background-color: black !important;"> REGISTRA </button>
+                            </form>
+                        </aside>
+                    </div>
                 </div>
             </div>
             <hr>

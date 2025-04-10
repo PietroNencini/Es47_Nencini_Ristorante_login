@@ -35,12 +35,17 @@ input.form_input:active {
 }
 
 #results_container * {
-    margin-top: 2rem !important;
-    margin-bottom: 2rem !important;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
 }
 
 #results_container > h3 {
     background-color: rgba(25, 135, 84, 0.5);
+}
+
+#results_container #reviews_space *{
+    margin-top: 0.5rem;
+    margin-bottom: 00.5rem;
 }
 
 @media only screen and (max-width: 576px) {
@@ -75,4 +80,15 @@ input.form_input:active {
 #user_info  li {
     margin-top: 0.2rem !important;
     margin-bottom: 0.2rem !important;
+}
+
+#review_form select {
+    width: 50% !important;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form-check-input {
+    width: 15px;
+    height: 15px;
 }

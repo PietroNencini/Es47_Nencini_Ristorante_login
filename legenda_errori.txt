@@ -1,7 +1,8 @@
 0: OK, 
--1: errore sconosciuto
+100: errore sconosciuto
 1: username non trovato, 
 2: password errata, 
 3: errore nella query, 
 4: username già presente nel DB
 5: indirizzo email già presente nel DB
+-2: recensione inserita con successo (da distinguere rispetto allo 0)
