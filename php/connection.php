@@ -16,6 +16,5 @@
 	- La connessione NON va a buon fine: l'oggetto $conn nel campo connect_error ha una stringa che contiene l'errore
 	*/
 	if ($conn->connect_error) {
-		header("Location: ../pages/error.html");  // Se la connessione NON va a buon fine, faccio un redirect a una pagina di errore
+		header("Location: ../../pages/error.html");  // Se la connessione NON va a buon fine, faccio un redirect a una pagina di errore
 	}
-?>

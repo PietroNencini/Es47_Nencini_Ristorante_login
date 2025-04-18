@@ -5,4 +5,5 @@
 3: errore nella query, 
 4: username già presente nel DB
 5: indirizzo email già presente nel DB
+6: Dati mancanti lato server (ad esempio se non è presente alcun ristorante)
 -2: recensione inserita con successo (da distinguere rispetto allo 0)

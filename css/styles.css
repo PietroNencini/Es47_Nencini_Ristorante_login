@@ -5,6 +5,10 @@ body {
     background-repeat: no-repeat;
 }
 
+#personal_page {
+    background-image: url("../images/personal_2.jpg");
+}
+
 .jaini {
     font-family: "Jaini", system-ui;
     font-weight: 400;
@@ -34,7 +38,7 @@ input.form_input:active {
     margin-bottom: 0.5rem;
 }
 
-#results_container * {
+#results_container *:not(#reviews_space *) {
     margin-top: 2rem;
     margin-bottom: 2rem;
 }
@@ -43,9 +47,9 @@ input.form_input:active {
     background-color: rgba(25, 135, 84, 0.5);
 }
 
-#results_container #reviews_space *{
+#reviews_space *, #review_form *{
     margin-top: 0.5rem;
-    margin-bottom: 00.5rem;
+    margin-bottom: 0.5rem;
 }
 
 @media only screen and (max-width: 576px) {
@@ -88,7 +92,11 @@ input.form_input:active {
     margin-right: auto;
 }
 
+#review_form label {
+    font-size: 1rem;
+}
+
 .form-check-input {
-    width: 15px;
-    height: 15px;
+    width: 20px;
+    height: 20px;
 }

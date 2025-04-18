@@ -25,9 +25,9 @@
         <span><img id="icon" src="./images/logo.png" alt="risto&rece" width=96px" class="d-block mx-auto"></span>
         <h1 class="home_title jaini text-center"> RISTO&RECE </h1>
     </header>
-    <div id="home_form_container" class="w-75 mx-auto bg-white p-4 mt-4">
+    <div id="home_form_container" class="w-75 mx-auto bg-secondary-subtle p-4 mt-4">
 
-        <div id="form_inside" class="w-50 border border-1 border-black rounded-3 p-3 mx-auto my-5">
+        <div id="form_inside" class="w-50 bg-white  rounded-3 p-3 mx-auto my-5">
             <p><?php
                 if(isset($_SESSION["session_user"]) && isset($_SESSION["error_code"])) {
                     echo $_SESSION["session_user"]." , ". $_SESSION["error_code"];
