@@ -8,7 +8,7 @@
     if(!isset($_SESSION["session_user"]))
         $_SESSION["session_user"] = "";
 
-    include "../connection.php";
+    require "../connection.php";
 
     $form_username = $_POST["username"];
     $form_password = $_POST["password"];

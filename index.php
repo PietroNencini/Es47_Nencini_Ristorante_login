@@ -28,11 +28,6 @@
     <div id="home_form_container" class="w-75 mx-auto bg-secondary-subtle p-4 mt-4">
 
         <div id="form_inside" class="w-50 bg-white  rounded-3 p-3 mx-auto my-5">
-            <p><?php
-                if(isset($_SESSION["session_user"]) && isset($_SESSION["error_code"])) {
-                    echo $_SESSION["session_user"]." , ". $_SESSION["error_code"];
-                }
-            ?></p>
             <form id="login_form" action="php/scripts/login_script.php" method="post">
                 <label for="username" class="form-label">Nome utente</label>
                 <input type="text" name="username" id="username" class="form_input form-control" minlength="4" required>
@@ -40,7 +35,7 @@
                 <label for="password" class="form-label"> Password</label>
                 <input type="password" name="password" id="password" class="form_input form-control" minlength="8" required>
             
-                <button type="submit" class="btn btn-warning fw-bold"> ACCEDI </button>
+                <button type="submit" class="btn btn-warning fw-bold my-3"> ACCEDI </button>
             </form>
 
             <?php 
@@ -63,7 +58,7 @@
                 }
             ?>
 
-            <p> Non hai un account? <a href="./php/registration.php"> Registrati ora </a> </p>
+            <p class="my-3"> Non hai un account? <a href="./php/registration.php"> Registrati ora </a> </p>
         </div>    
     </div>
 

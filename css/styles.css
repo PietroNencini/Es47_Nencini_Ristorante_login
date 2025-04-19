@@ -5,6 +5,16 @@ body {
     background-repeat: no-repeat;
 }
 
+body.no-scroll {
+    overflow: hidden; /* Disabilita lo scroll */
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 #personal_page {
     background-image: url("../images/personal_2.jpg");
 }
@@ -33,6 +43,11 @@ input.form_input:active {
     border-bottom: blue solid 2px;
 }
 
+input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus {
+    border-bottom: #ffc107 solid 3px !important;
+    outline: none !important;
+}
+
 #login_form *:not(label) {
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
@@ -52,13 +67,18 @@ input.form_input:active {
     margin-bottom: 0.5rem;
 }
 
-@media only screen and (max-width: 576px) {
-    #form_inside {
-        border: none !important;
-        width:100% !important;
+@media only screen and (max-width: 992px) {
+    #login_made {
+        width: 75% !important;
     }
     
-    #login_form * {
+    #form_inside, #form_inside *:not(input[type="radio"]) {
+        width: 100% !important;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    #login_form *:not(input[type="radio"]) {
         font-size: larger;
         text-align: center !important;
         width: 100% !important;
@@ -69,15 +89,19 @@ input.form_input:active {
     }
 
     h1.home_title {
-        font-size: xx-large;
+        font-size: 4rem;
     }
 
     #login_form button[type="submit"] {
         margin-top: 3rem !important;
     }
 
-    #results_container *, #logout_container * {
-        width: 100% !important;
+    #login_made, #info_container, #logout_button {
+        width: 90% !important;
+    }
+
+    #rev_table_container {
+        padding: 0 !important;
     }
 }
 
@@ -99,4 +123,49 @@ input.form_input:active {
 .form-check-input {
     width: 20px;
     height: 20px;
+}
+
+#logout-box {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+div.logout-content {
+    padding: 2rem;
+    width: 80%;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.logout-content h2 {
+    margin-bottom: 20px;
+}
+
+.buttons button {
+    margin: 5px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+#confirm-logout {
+    background-color: #d9534f;
+    color: white;
+}
+
+#cancel-logout {
+    background-color: #5bc0de;
+    color: white;
 }

@@ -8,6 +8,10 @@
         header(header: "Location: ../index.php");
     }
 
+    if(!isset($_SESSION["rest_error"])) {
+        $_SESSION["rest_error"] = "N/A";
+    }
+
     $logged_user = $_SESSION["session_user"];
 
     $info_list = ["USERNAME", "NOME", "COGNOME", "EMAIL", "MEMBRO DAL"];
@@ -36,22 +40,26 @@
             <?php
                 switch($_SESSION["error_code"]) {
                     case 0:
-                        $output = "<h3 class='text-center p-3 w-25 mx-auto rounded-3 text-white'> ACCESSO EFFETTUATO </h3> <p class='text-center fs-4 '> Benvenuto <span class='fw-bold'> $logged_user </span> </p>";
+                        $output = "<h3 class='text-center p-3 w-25 mx-auto rounded-3 text-white' id='login_made'> ACCESSO EFFETTUATO </h3> <p class='text-center fs-4 '> Benvenuto <span class='fw-bold'> $logged_user </span> </p>";
                         break;
                     case -2:
                         $output = "<p class='text-center fs-4'> Grazie per la tua recensione, <span class='fw-bold'> $logged_user </span> </p>";
                         break;
                     case 3:
                         $output = "<p class='bg-danger text-white fw-bold text-center rounded-3 mt-2 mb-3 fs-3'> ERRORE: impossibile inserire la recensione, controlla i dati e riprova </p>";
-                        break;                        
+                        break;
+                    case 7:
+                        $output = "<p class='bg-danger text-white fw-bold text-center rounded-3 mt-2 mb-3 fs-3'> ERRORE: Hai già dato una recensione al ristorante ".$_SESSION["rest_error"]." </p>";                   
+                        break;
                     default:
                         echo "ERRORE";
                         exit;
                 }
                 echo $output;
+                $_SESSION["rest_error"] = "N/A";
                 $_SESSION["error_code"] = 0;
             ?>
-            
+
             <hr>
 
             <div id="info_container" class="w-50 mx-auto">
@@ -81,13 +89,13 @@
             <hr>
             <div id="reviews_space">
                 <div class="row">
-                    <div class="col col-sm-6">
+                    <div class="col-12 col-lg-6">
                         <div id="rev_table_container" class="w-100 mx-auto px-5">
                             <table id="revs_table" class="table table-bordered border-warning rounded-3" style="border-radius: 0.3rem !important;">    
                                 <?php
                                     include "./scripts/utils.php";
                                     $required_id = getUserIDByUsername($logged_user);
-                                    $rev_query = "SELECT RT.nome, RT.indirizzo, RV.voto, RV.data_rec FROM recensione RV INNER JOIN ristorante RT ON RV.id_ristorante = RT.id_ristorante WHERE RV.id_utente = $required_id";
+                                    $rev_query = "SELECT RT.nome AS Ristorante, RT.Indirizzo, RV.voto as Valutazione, RV.data_rec as Data FROM recensione RV INNER JOIN ristorante RT ON RV.id_ristorante = RT.id_ristorante WHERE RV.id_utente = $required_id";
                                     if($rev_result = $conn->query(query: $rev_query)) {
                                         $num_rec_output = "<p class='fs-4 text-center'> Recensioni totali: $rev_result->num_rows </p>";
                                         if($rev_result->num_rows > 0) {
@@ -114,7 +122,7 @@
                             </table>
                         </div>
                     </div>
-                    <div class="col col-sm-6">
+                    <div class="col-12 col-lg-6">
                         <aside class="p-2 bg-white text-center rounded-5">
                             <p class="text-center fs-4"> Vuoi aggiungere una recensione ?</p>
                             <form id="review_form" action="./scripts/review_insert_script.php" method="post">
@@ -162,15 +170,26 @@
                 </div>
                 <hr>
             </div>
-            <form action="./scripts/logout_script.php" method="post">
-                <button type="submit" class="btn btn-danger fw-bold fs-5 d-block mx-auto"> LOGOUT </button>
-            </form>
+            <button id="logout_button" type="submit" class="w-25 btn btn-danger fw-bold fs-5 d-block mx-auto" onclick="show('logout-box', 'flex'), disable_scroll()"> LOGOUT </button>
         </div>
 
+        <!--finestra di LOGOUT (si apre al click del pulsante prima)-->
+            <div id="logout-box" class="d-none">
+                <div class="logout-content">
+                    <h2> Sei sicuro di voler effettuare la disconnessione? </h2>
+                    <h5> Sarà necessario ripetere l'accesso per poter tornare a questa pagina </h5>
+                    <div class="buttons">
+                        <form action="./scripts/logout_script.php" method="post">
+                            <button id="confirm-logout" type="submit" class="btn btn-danger" onclick="hide('logout-box'), enable_scroll()">CONFERMA</button>
+                            <button id="cancel-logout" type="button" class="btn btn-outline-danger" onclick="hide('logout-box'), enable_scroll()">ANNULLA</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
 
         <!--? SCRIPT DI BOOTSTRAP-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
         <!--? JAVASCRIPT PERSONALE-->
-        <script src="../../../javascript/script.js"></script>
+        <script src="../javascript/script.js"></script>
     </body>
 </html>
