@@ -31,7 +31,7 @@
         
         <div id="logout_container" class="my-5 border border-1 border-black rounded-4 p-3 mx-auto w-75 bg-secondary-subtle shadow-lg">
             <h3 class="text-center p-3 w-25 mx-auto rounded-3"> LOGOUT EFFETTUATO CON SUCCESSO </h3>
-            <p class="text-center"><a href="../../index.php" class="link fw-bold fs-4">Torna alla pagina di login</a></p>
+            <p class="text-center"><a href="../../index.php" class="link fw-bold fs-4">Torna alla Home Page</a></p>
         </div>
 
         <!--? SCRIPT DI BOOTSTRAP-->
