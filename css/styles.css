@@ -6,10 +6,12 @@ body {
 }
 
 body.no-scroll {
-    overflow: hidden; /* Disabilita lo scroll */
+    overflow: hidden;
+    /* Disabilita lo scroll */
 }
 
-html, body {
+html,
+body {
     height: 100%;
     margin: 0;
     padding: 0;
@@ -17,6 +19,10 @@ html, body {
 
 #personal_page {
     background-image: url("../images/personal_2.jpg");
+}
+
+#admin_page {
+    background-image: url("../images/server_hall.jpg");
 }
 
 .jaini {
@@ -43,7 +49,9 @@ input.form_input:active {
     border-bottom: blue solid 2px;
 }
 
-input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus {
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus {
     border-bottom: #ffc107 solid 3px !important;
     outline: none !important;
 }
@@ -58,11 +66,12 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focu
     margin-bottom: 2rem;
 }
 
-#results_container > h3 {
+#results_container>h3 {
     background-color: rgba(25, 135, 84, 0.5);
 }
 
-#reviews_space *, #review_form *{
+#reviews_space *,
+#review_form * {
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
 }
@@ -71,8 +80,9 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focu
     #login_made {
         width: 75% !important;
     }
-    
-    #form_inside, #form_inside *:not(input[type="radio"]) {
+
+    #form_inside,
+    #form_inside *:not(input[type="radio"]) {
         width: 100% !important;
     }
 }
@@ -96,7 +106,8 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focu
         margin-top: 3rem !important;
     }
 
-    #login_made, #info_container, #logout_button {
+    #login_made,
+    #info_container {
         width: 90% !important;
     }
 
@@ -105,7 +116,7 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focu
     }
 }
 
-#user_info  li {
+#user_info li {
     margin-top: 0.2rem !important;
     margin-bottom: 0.2rem !important;
 }

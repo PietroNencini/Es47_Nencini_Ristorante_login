@@ -53,7 +53,6 @@
                     }
                     if($error)
                         echo "<p class='bg-danger text-white fw-bold text-center rounded-3 mt-2 mb-3 fs-5'> ERRORE: $output </p>";
-
                     unset($_SESSION["error_code"]);
                 }
             ?>

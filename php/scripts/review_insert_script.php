@@ -7,6 +7,7 @@
 
     if(!isset($_SESSION["error_code"]) || !isset($_SESSION["session_user"])) {      // Controllo sulla sessione
         header(header: "Location: ../../pages/error.html");
+        exit;
     }
 
     $restaurant_id = $_POST["restaurant"];
