@@ -40,17 +40,16 @@ if (!isset($_SESSION["session_user"]) || $_SESSION["session_user"] != "admin") {
             
             <?php
                 switch ($_SESSION["error_code"]) {
-                    case 0:
+                    case -3:
                         $output = "<p class='text-center fs-4 '> Ristorante inserito con successo </p>";
                         break;
-                    case -2:
-                        $output = "<p class='text-center fs-4'> Grazie per la tua recensione, <span class='fw-bold'> $logged_user </span> </p>";
+                    case 0:
+                        $output = "";
                         break;
+                    case 8:
+                        $output = "<p class='bg-danger text-white fw-bold text-center rounded-3 mt-2 mb-3 fs-3'> ERRORE: Ristorante già presente o non aggiungibile </p>";
                     case 3:
-                        $output = "<p class='bg-danger text-white fw-bold text-center rounded-3 mt-2 mb-3 fs-3'> ERRORE: impossibile inserire la recensione, controlla i dati e riprova </p>";
-                        break;
-                    case 7:
-                        $output = "<p class='bg-danger text-white fw-bold text-center rounded-3 mt-2 mb-3 fs-3'> ERRORE: Hai già dato una recensione al ristorante " . $_SESSION["rest_error"] . " </p>";
+                        $output = "<p class='bg-danger text-white fw-bold text-center rounded-3 mt-2 mb-3 fs-3'> ERRORE: impossibile connettersi al servizio </p>";
                         break;
                     default:
                         echo "ERRORE";
@@ -61,7 +60,7 @@ if (!isset($_SESSION["session_user"]) || $_SESSION["session_user"] != "admin") {
                 $_SESSION["error_code"] = 0;
             ?>
 
-            <h4 class="text-center my-2"> Ristoranti attuali nel sistema </h4>
+            <h4 class="text-center my-2"> RISTORANTI ATTUALI NEL SISTEMA </h4>
             <table id="restaurants_table" class="table w-75 mx-auto my-3 rounded rounded-3">
                 <?php
                 $rest_query = "SELECT * FROM ristorante";
@@ -99,7 +98,7 @@ if (!isset($_SESSION["session_user"]) || $_SESSION["session_user"] != "admin") {
         </div>
         <div id="rist_form_container" class="text-center">
             <h4 class="text-center my-2"> INSERIMENTO RISTORANTI </h4>
-            <form action="-/scripts/rest_insert.php" method="post" class="w-50 mx-auto">
+            <form action="./scripts/rest_insert.php" method="post" class="w-50 mx-auto">
                 <label for="r_name">Nome</label>
                 <input type="text" id="r_name" name="r_name" class="form-control">
                 <label for="r_address">Indirizzo</label>

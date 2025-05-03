@@ -2,7 +2,7 @@
 
     session_start();
 
-    include "connection.php";
+    include "../connection.php";
 
     if (!isset($_SESSION["session_user"]) || $_SESSION["session_user"] != "admin") {
         header("Location: ../index.php");
@@ -13,15 +13,16 @@
     $rest_address = $_POST["r_address"];
     $rest_city = $_POST["r_city"];
 
-    $insert = "INSERT INTO ristorante(nome, indirizzo, citta) VALUES ($rest_name, $rest_address, $rest_city)";
+    $insert = "INSERT INTO ristorante(nome, indirizzo, citta) VALUES ('$rest_name', '$rest_address', '$rest_city')";
     if($conn->query($insert)) {
-
-        if($conn->query($rest_address)) {
-            
+        $_SESSION["error_code"] = 8;
+        if($conn->query(query: $rest_address) && $conn->affected_rows > 0) {
+            $_SESSION["error_code"] = -3;
         }
-        header("Location: admin_panel.php");
+        header("Location: ../admin_panel.php");
     } else {
-        header("Location: ../pages/error.html");
+        $_SESSION["error_code"] = 3;
+        header("Location: ../../pages/error.html");
     }
 
 
