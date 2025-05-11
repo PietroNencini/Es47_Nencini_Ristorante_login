@@ -1,6 +1,4 @@
 <?php
-
-
     session_start();
 
     include "../connection.php";
@@ -11,18 +9,18 @@
     }
 
     $restaurant_id = $_POST["restaurant"];
-    $review_value = $_POST["vote"];
+    $review_value = $_POST["rating"];
 
-    if($restaurant_id != "not_available") {                                         // not_available è il valore della option se non ci sono ristoranti disponibili
+    if($restaurant_id != "not_available") {                   // not_available è il valore della option se non ci sono ristoranti disponibili
 
         if($result_1 = $conn->query(query: "SELECT id_cliente FROM utente WHERE username = '".$_SESSION["session_user"]."'")) {
             if($result_1->num_rows > 0) {
                 $user_id = $result_1->fetch_assoc()["id_cliente"];
-            } 
+            }
 
-            $first_check_query = "SELECT count(*) FROM recensione WHERE id_utente = '$user_id' AND id_ristorante = '$restaurant_id'";
+            $first_check_query = "SELECT count(*) AS num_rec FROM recensione WHERE id_utente = '$user_id' AND id_ristorante = '$restaurant_id'";
             if($user_rest_check = $conn->query($first_check_query)) {
-                if($user_rest_check->num_rows > 0) {
+                if($user_rest_check->fetch_assoc()["num_rec"] > 0) {
                     $_SESSION["error_code"] = 7;
 
                     if($rest_result = $conn->query("SELECT nome FROM ristorante WHERE id_ristorante = '$restaurant_id'")) {

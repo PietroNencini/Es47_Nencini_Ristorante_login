@@ -20,7 +20,7 @@
     <!--* CSS PERSONALE-->
     <link rel="stylesheet" href="../css/styles.css">
 </head>
-<body>
+<body class="log_page">
     <header class="d-flex align-items-center justify-content-center bg-warning">
         <span><img id="icon" src="../images/logo.png" alt="risto&rece" width=96px" class="d-block mx-auto"></span>
         <h1 class="home_title jaini text-center"> RISTO&RECE </h1>

@@ -48,6 +48,7 @@ if (!isset($_SESSION["session_user"]) || $_SESSION["session_user"] != "admin") {
                         break;
                     case 8:
                         $output = "<p class='bg-danger text-white fw-bold text-center rounded-3 mt-2 mb-3 fs-3'> ERRORE: Ristorante già presente o non aggiungibile </p>";
+                        break;
                     case 3:
                         $output = "<p class='bg-danger text-white fw-bold text-center rounded-3 mt-2 mb-3 fs-3'> ERRORE: impossibile connettersi al servizio </p>";
                         break;

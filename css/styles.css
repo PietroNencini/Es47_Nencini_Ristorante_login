@@ -1,8 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Jaini&display=swap');
 
 body {
-    background-image: url("../images/restaurant.jpg");
+    background-size: cover;
+    background-position: center;
     background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+
+body.log_page {
+    background-image: url("../images/restaurant.jpg");
+}
+
+#personal_page {
+    background-image: url("../images/personal_2.jpg");
 }
 
 body.no-scroll {
@@ -15,10 +26,6 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
-}
-
-#personal_page {
-    background-image: url("../images/personal_2.jpg");
 }
 
 #admin_page {
@@ -36,13 +43,12 @@ h1.home_title {
 }
 
 #home_form_container {
-    border: purple solid 0.2rem;
-    border-radius: 5%;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    border-radius: 1rem;
 }
 
 input.form_input {
     width: 50%;
-
 }
 
 input.form_input:active {

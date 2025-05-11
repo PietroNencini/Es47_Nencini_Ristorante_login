@@ -38,6 +38,8 @@ $info_list = ["USERNAME", "NOME", "COGNOME", "EMAIL", "MEMBRO DAL"];
     <link rel="stylesheet" type="text/css" href="../css/styles.css">
     <!--*ALTRO CSS-->
     <link rel="stylesheet" type="text/css" href="../css/logout_button.css">
+    <!--*CSS STELLINE-->
+    <link rel="stylesheet" type="text/css" href="../css/stars.css">
 </head>
 
 <body id="personal_page">
@@ -50,33 +52,33 @@ $info_list = ["USERNAME", "NOME", "COGNOME", "EMAIL", "MEMBRO DAL"];
     <div id="results_container"
         class="my-5 border border-1 border-black rounded-4 p-3 mx-auto w-75 bg-secondary-subtle shadow-lg">
         <?php
-        switch ($_SESSION["error_code"]) {
-            case 0:
-                $output = "<h3 class='text-center p-3 w-25 mx-auto rounded-3 text-white' id='login_made'> ACCESSO EFFETTUATO </h3> <p class='text-center fs-4 '> Benvenuto <span class='fw-bold'> $logged_user </span> </p>";
-                break;
-            case -2:
-                $output = "<p class='text-center fs-4'> Grazie per la tua recensione, <span class='fw-bold'> $logged_user </span> </p>";
-                break;
-            case 3:
-                $output = "<p class='bg-danger text-white fw-bold text-center rounded-3 mt-2 mb-3 fs-3'> ERRORE: impossibile inserire la recensione, controlla i dati e riprova </p>";
-                break;
-            case 7:
-                $output = "<p class='bg-danger text-white fw-bold text-center rounded-3 mt-2 mb-3 fs-3'> ERRORE: Hai già dato una recensione al ristorante " . $_SESSION["rest_error"] . " </p>";
-                break;
-            default:
-                echo "ERRORE";
-                exit;
-        }
-        echo $output;
-        $_SESSION["rest_error"] = "N/A";
-        $_SESSION["error_code"] = 0;
+            switch ($_SESSION["error_code"]) {
+                case 0:
+                    $output = "<h3 class='text-center p-3 w-25 mx-auto rounded-3 text-white' id='login_made'> ACCESSO EFFETTUATO </h3> <p class='text-center fs-4 '> Benvenuto <span class='fw-bold'> $logged_user </span> </p>";
+                    break;
+                case -2:
+                    $output = "<p class='text-center fs-4'> Grazie per la tua recensione, <span class='fw-bold'> $logged_user </span> </p>";
+                    break;
+                case 3:
+                    $output = "<p class='bg-danger text-white fw-bold text-center rounded-3 mt-2 mb-3 fs-3'> ERRORE: impossibile inserire la recensione, controlla i dati e riprova </p>";
+                    break;
+                case 7:
+                    $output = "<p class='bg-danger text-white fw-bold text-center rounded-3 mt-2 mb-3 fs-3'> ERRORE: Hai già dato una recensione al ristorante " . $_SESSION["rest_error"] . " </p>";
+                    break;
+                default:
+                    echo "ERRORE";
+                    exit;
+            }
+            echo $output;
+            $_SESSION["rest_error"] = "N/A";
+            $_SESSION["error_code"] = 0;
         ?>
 
         <hr>
 
         <div id="info_container" class="w-50 mx-auto">
             <p class=" fw-bold fs-4 "> Informazioni utente </p>
-            <ul id="user_info">
+            <ul id="user_info" style="list-style-type: none;">
                 <?php
                 include "connection.php";
                 $query = "SELECT username, nome, cognome, email, data_reg FROM utente WHERE username = '$logged_user' ";
@@ -102,35 +104,35 @@ $info_list = ["USERNAME", "NOME", "COGNOME", "EMAIL", "MEMBRO DAL"];
         <div id="reviews_space">
             <div class="row">
                 <div class="col-12 col-lg-6">
-                    <div id="rev_table_container" class="w-100 mx-auto px-5">
+                    <div id="rev_table_container" class="w-100 mx-auto px-5 rounded-3">
                         <table id="revs_table" class="table table-bordered border-warning rounded-3"
                             style="border-radius: 0.3rem !important;">
                             <?php
-                            include "./scripts/utils.php";
-                            $required_id = getUserIDByUsername($logged_user);
-                            $rev_query = "SELECT RT.nome AS Ristorante, RT.Indirizzo, RV.voto as Valutazione, RV.data_rec as Data FROM recensione RV INNER JOIN ristorante RT ON RV.id_ristorante = RT.id_ristorante WHERE RV.id_utente = $required_id";
-                            if ($rev_result = $conn->query(query: $rev_query)) {
-                                $num_rec_output = "<p class='fs-4 text-center'> Recensioni totali: $rev_result->num_rows </p>";
-                                if ($rev_result->num_rows > 0) {
-                                    echo "<thead class='table-light'> <tr class='table-warning-subtle'>";
-                                    while ($field = $rev_result->fetch_field()) {
-                                        echo "<th> $field->name </th>";
-                                    }
-                                    echo "</tr> </thead> <tbody>";
-                                    while ($row = $rev_result->fetch_assoc()) {
-                                        echo "<tr>";
-                                        foreach ($row as $value) {
-                                            echo "<td> $value </td>";
+                                include "./scripts/utils.php";
+                                $required_id = getUserIDByUsername($logged_user);
+                                $rev_query = "SELECT RT.nome AS Ristorante, RT.Indirizzo, RV.voto as Valutazione, RV.data_rec as Data FROM recensione RV INNER JOIN ristorante RT ON RV.id_ristorante = RT.id_ristorante WHERE RV.id_utente = $required_id";
+                                if ($rev_result = $conn->query(query: $rev_query)) {
+                                    $num_rec_output = "<p class='fs-4 text-center'> Recensioni totali: $rev_result->num_rows </p>";
+                                    if ($rev_result->num_rows > 0) {
+                                        echo "<thead class='table-light'> <tr class='table-warning-subtle'>";
+                                        while ($field = $rev_result->fetch_field()) {
+                                            echo "<th> $field->name </th>";
                                         }
-                                        echo "</tr>";
+                                        echo "</tr> </thead> <tbody>";
+                                        while ($row = $rev_result->fetch_assoc()) {
+                                            echo "<tr>";
+                                            foreach ($row as $value) {
+                                                echo "<td> $value </td>";
+                                            }
+                                            echo "</tr>";
+                                        }
+                                        echo "<tr> <td colspan='4'> $num_rec_output </td> </tr> </tbody>";
+                                    } else {
+                                        echo $num_rec_output;
                                     }
-                                    echo "<tr> <td colspan='4'> $num_rec_output </td> </tr> </tbody>";
                                 } else {
-                                    echo $num_rec_output;
+                                    echo "ERRORE: Impossibile trovare recensioni";
                                 }
-                            } else {
-                                echo "ERRORE: Impossibile trovare recensioni";
-                            }
                             ?>
                         </table>
                     </div>
@@ -156,7 +158,7 @@ $info_list = ["USERNAME", "NOME", "COGNOME", "EMAIL", "MEMBRO DAL"];
                                 ?>
                             </select>
                             <label for="#" class="me-2"> Valutazione: </label>
-                            <div class="form-check form-check-inline">
+                            <!--<div class="form-check form-check-inline">
                                 <input type="radio" name="vote" value="1" class="form-check-input" id="vote-1">
                                 <label for="vote-1" class="form-check-label"> 1 </label>
                             </div>
@@ -175,9 +177,105 @@ $info_list = ["USERNAME", "NOME", "COGNOME", "EMAIL", "MEMBRO DAL"];
                             <div class="form-check form-check-inline">
                                 <input type="radio" name="vote" value="5" class="form-check-input" id="vote-5">
                                 <label for="vote-5" class="form-check-label"> 5 </label>
+                            </div>-->
+                            <div class="rating d-flex justify-content-center align-items-center">
+                                <input value="5" name="rating" id="star5" type="radio"/>
+                                <label title="5 stars" for="star5">
+                                    <svg stroke-linejoin="round" stroke-linecap="round" stroke-width="2"
+                                        stroke="#000000" fill="none" viewBox="0 0 24 24" height="35" width="35"
+                                        xmlns="http://www.w3.org/2000/svg" class="svgOne">
+                                        <polygon
+                                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                        </polygon>
+                                    </svg>
+                                    <svg stroke-linejoin="round" stroke-linecap="round" stroke-width="2"
+                                        stroke="#000000" fill="none" viewBox="0 0 24 24" height="35" width="35"
+                                        xmlns="http://www.w3.org/2000/svg" class="svgTwo">
+                                        <polygon
+                                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                        </polygon>
+                                    </svg>
+                                    <div class="ombre"></div>
+                                </label>
+
+                                <input value="4" name="rating" id="star4" type="radio" />
+                                <label title="4 stars" for="star4">
+                                    <svg stroke-linejoin="round" stroke-linecap="round" stroke-width="2"
+                                        stroke="#000000" fill="none" viewBox="0 0 24 24" height="35" width="35"
+                                        xmlns="http://www.w3.org/2000/svg" class="svgOne">
+                                        <polygon
+                                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                        </polygon>
+                                    </svg>
+                                    <svg stroke-linejoin="round" stroke-linecap="round" stroke-width="2"
+                                        stroke="#000000" fill="none" viewBox="0 0 24 24" height="35" width="35"
+                                        xmlns="http://www.w3.org/2000/svg" class="svgTwo">
+                                        <polygon
+                                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                        </polygon>
+                                    </svg>
+                                    <div class="ombre"></div>
+                                </label>
+
+                                <input value="3" name="rating" id="star3" type="radio" />
+                                <label title="3 stars" for="star3">
+                                    <svg stroke-linejoin="round" stroke-linecap="round" stroke-width="2"
+                                        stroke="#000000" fill="none" viewBox="0 0 24 24" height="35" width="35"
+                                        xmlns="http://www.w3.org/2000/svg" class="svgOne">
+                                        <polygon
+                                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                        </polygon>
+                                    </svg>
+                                    <svg stroke-linejoin="round" stroke-linecap="round" stroke-width="2"
+                                        stroke="#000000" fill="none" viewBox="0 0 24 24" height="35" width="35"
+                                        xmlns="http://www.w3.org/2000/svg" class="svgTwo">
+                                        <polygon
+                                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                        </polygon>
+                                    </svg>
+                                    <div class="ombre"></div>
+                                </label>
+
+                                <input value="2" name="rating" id="star2" type="radio" />
+                                <label title="2 stars" for="star2">
+                                    <svg stroke-linejoin="round" stroke-linecap="round" stroke-width="2"
+                                        stroke="#000000" fill="none" viewBox="0 0 24 24" height="35" width="35"
+                                        xmlns="http://www.w3.org/2000/svg" class="svgOne">
+                                        <polygon
+                                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                        </polygon>
+                                    </svg>
+                                    <svg stroke-linejoin="round" stroke-linecap="round" stroke-width="2"
+                                        stroke="#000000" fill="none" viewBox="0 0 24 24" height="35" width="35"
+                                        xmlns="http://www.w3.org/2000/svg" class="svgTwo">
+                                        <polygon
+                                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                        </polygon>
+                                    </svg>
+                                    <div class="ombre"></div>
+                                </label>
+
+                                <input value="1" name="rating" id="star1" type="radio" />
+                                <label title="1 star" for="star1">
+                                    <svg stroke-linejoin="round" stroke-linecap="round" stroke-width="2"
+                                        stroke="#000000" fill="none" viewBox="0 0 24 24" height="35" width="35"
+                                        xmlns="http://www.w3.org/2000/svg" class="svgOne">
+                                        <polygon
+                                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                        </polygon>
+                                    </svg>
+                                    <svg stroke-linejoin="round" stroke-linecap="round" stroke-width="2"
+                                        stroke="#000000" fill="none" viewBox="0 0 24 24" height="35" width="35"
+                                        xmlns="http://www.w3.org/2000/svg" class="svgTwo">
+                                        <polygon
+                                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                        </polygon>
+                                    </svg>
+                                    <div class="ombre"></div>
+                                </label>
                             </div>
-                            <button type="submit" class="btn text-white fw-bold d-block mx-auto"
-                                style="background-color: black !important;"> REGISTRA </button>
+
+                            <button type="submit" class="btn btn-warning fw-bold d-block mx-auto"> REGISTRA </button>
                         </form>
                     </aside>
                 </div>
