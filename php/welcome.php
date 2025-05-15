@@ -167,26 +167,6 @@
                                 ?>
                             </select>
                             <label for="#" class="me-2"> Valutazione: </label>
-                            <!--<div class="form-check form-check-inline">
-                                <input type="radio" name="vote" value="1" class="form-check-input" id="vote-1">
-                                <label for="vote-1" class="form-check-label"> 1 </label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input type="radio" name="vote" value="2" class="form-check-input" id="vote-3">
-                                <label for="vote-1" class="form-check-label"> 2 </label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input type="radio" name="vote" value="3" class="form-check-input" id="vote-3" checked>
-                                <label for="vote-3" class="form-check-label"> 3 </label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input type="radio" name="vote" value="4" class="form-check-input" id="vote-4">
-                                <label for="vote-4" class="form-check-label"> 4 </label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input type="radio" name="vote" value="5" class="form-check-input" id="vote-5">
-                                <label for="vote-5" class="form-check-label"> 5 </label>
-                            </div>-->
                             <div class="rating d-flex justify-content-center align-items-center">
                                 <input value="5" name="rating" id="star5" type="radio"/>
                                 <label title="5 stars" for="star5">
@@ -291,6 +271,32 @@
             </div>
             <hr>
         </div>
+        <div id="resturant_info_space">
+            <div class="bg-white w-75 mx-auto text-center p-3 rounded-5">
+                <h4> Vuoi saperne di più su un ristorante? </h4> <br>
+                <form action="rest_info.php" method="get">
+                    <label for="nome_ristorante" class="form-label"> CERCALO QUI! </label>
+                    <select name="nome_ristorante" class="form-select w-25 mx-auto my-3">
+                        <?php
+                            if ($result = $conn->query(query: "SELECT id_ristorante AS id, nome FROM ristorante")) {
+                                if ($result->num_rows > 0) {
+                                    while ($row = $result->fetch_assoc()) {
+                                        echo "<option value='" . $row["id"] . "'> " . $row["nome"] . " </option>";
+                                    }
+                                } else {
+                                    echo "<option value='not_available'> Nessun ristorante disponibile </option>";
+                                }
+                            } else {
+                                echo "ERRORE";
+                                exit;
+                            }
+                        ?>
+                    </select>
+                    <button type="submit" class="btn btn-success"> RICERCA </button>
+                </form>
+            </div>
+        </div>
+        <hr>
         <!--<button id="logout_button" type="submit" class="w-25 btn btn-danger fw-bold fs-5 d-block mx-auto" onclick="show('logout-box', 'flex'), disable_scroll()"> LOGOUT </button>-->
         <!-- From Uiverse.io by vinodjangid07 -->
         <button id="logout_button" class="Btn mx-auto" onclick="show('logout-box', 'flex'), disable_scroll()">

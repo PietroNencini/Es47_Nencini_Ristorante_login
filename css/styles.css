@@ -16,6 +16,10 @@ body.log_page {
     background-image: url("../images/personal_2.jpg");
 }
 
+#restaurant_info_page {
+    background-image: url("../images/personal.jpg");
+}
+
 body.no-scroll {
     overflow: hidden;
     /* Disabilita lo scroll */
@@ -67,7 +71,7 @@ input[type="email"]:focus {
     margin-bottom: 0.5rem;
 }
 
-#results_container *:not(#reviews_space *) {
+#results_container *:not(#reviews_space *):not(#resturant_info_space *) {
     margin-top: 2rem;
     margin-bottom: 2rem;
 }

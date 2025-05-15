@@ -12,3 +12,6 @@
             header("Location: ../../pages/error.html");
         } 
     }
+
+    // La select deve essere creata fuori dalla funzione, che invece si occupa delle <option>
+    
