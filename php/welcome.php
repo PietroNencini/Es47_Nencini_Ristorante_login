@@ -1,26 +1,36 @@
 <?php
-session_start();
+    session_start();
 
-if (!isset($_SESSION["error_code"])) {
-    $_SESSION["error_code"] = 0;
-}
-if (!isset($_SESSION["session_user"])) {         //? Nel caso si accedesse a questa pagina senza aver fatto il login
-    header(header: "Location: ../index.php");
-    exit;
-}
+    include "connection.php";
 
-if (!isset($_SESSION["rest_error"])) {
-    $_SESSION["rest_error"] = "N/A";
-}
+    if (!isset($_SESSION["error_code"])) {
+        $_SESSION["error_code"] = 0;
+    }
+    if (!isset($_SESSION["session_user"])) {         //? Nel caso si accedesse a questa pagina senza aver fatto il login
+        header(header: "Location: ../index.php");
+        exit;
+    }
 
-$logged_user = $_SESSION["session_user"];
+    if (!isset($_SESSION["rest_error"])) {
+        $_SESSION["rest_error"] = "N/A";
+    }
 
-if ($logged_user == "admin") {
-    header("Location: admin_panel.php");
-    exit;
-}
+    $logged_user = $_SESSION["session_user"];
 
-$info_list = ["USERNAME", "NOME", "COGNOME", "EMAIL", "MEMBRO DAL"];
+    if($result = $conn->query("SELECT is_admin FROM utente WHERE username = '$logged_user'")) {
+        $row = $result->fetch_assoc();
+        if($row["is_admin"] == 1) {
+            header("Location: admin_panel.php");
+            exit;
+        }
+    } else {
+        header("Location: ../pages/error.html");
+        exit;
+    }
+
+
+
+    $info_list = ["USERNAME", "NOME", "COGNOME", "EMAIL", "MEMBRO DAL"];
 ?>
 
 <!DOCTYPE html>
@@ -80,7 +90,6 @@ $info_list = ["USERNAME", "NOME", "COGNOME", "EMAIL", "MEMBRO DAL"];
             <p class=" fw-bold fs-4 "> Informazioni utente </p>
             <ul id="user_info" style="list-style-type: none;">
                 <?php
-                include "connection.php";
                 $query = "SELECT username, nome, cognome, email, data_reg FROM utente WHERE username = '$logged_user' ";
                 if ($result = $conn->query(query: $query)) {
                     if ($result->num_rows > 0) {
