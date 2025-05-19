@@ -15,7 +15,7 @@
     $id_rest = $_GET["nome_ristorante"];
 
 
-    if($result = $conn->query("SELECT nome, indirizzo, citta FROM ristorante WHERE id_ristorante = $id_rest")) {
+    if($result = $conn->query("SELECT nome, indirizzo, citta as città, latitudine, longitudine FROM ristorante WHERE id_ristorante = $id_rest")) {
 
         $info_ristorante = $result->fetch_assoc();
 
@@ -44,13 +44,12 @@
         <!--*CSS STELLINE-->
         <link rel="stylesheet" type="text/css" href="../css/stars.css">
         <!--*LEAFLET-->
-         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
             integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
             crossorigin=""/>
-        
     </head>
 
-    <body id="restaurant_info_page">
+    <body id="restaurant_info_page" onload="showMap('rest_map' ,<?php echo $info_ristorante['latitudine'] ?>, <?php echo $info_ristorante['longitudine'] ?>)">
         
         <header class="d-flex align-items-center justify-content-center bg-warning">
             <span><img id="icon" src="../images/logo.png" alt="risto&rece" width="96px" class="d-block mx-auto"></span>
@@ -58,25 +57,105 @@
         </header>
 
 
-        <div class="w-75 mx-auto my-5 bg-white rounded-4 text-center p-3">
+        <div id="rest_info_page_container" class="w-75 mx-auto my-5 bg-white rounded-4 text-center p-3">
 
-            <h1> INFORMAZIONI RISTORANTE </h1>
+            <h2> Informazioni su: <?php echo $info_ristorante["nome"]; ?> </h2>
 
+            <div id="ristor_info" class="w-50 mx-auto my-4 row fs-5">
+                <div class="col col-md-6">
+                    <div class="info_show"> 
+                        <img src="../images/location.png" alt="indirizzo:">
+                        <p> <?php echo $info_ristorante["indirizzo"]; ?> </p>
+                    </div>
+                </div>
+                <div class="col col-md-6">
+                    <div class="info_show">
+                        <img src="../images/houses.png" alt="citta:">
+                        <p> <?php echo $info_ristorante["città"]; ?> </p>
+                    </div>
+                </div>
+                <div class="">
+                    <div class="info_show">
+                        <img src="../images/planet.png" alt="posizione:">
+                        <p> <?php echo $info_ristorante["latitudine"] . ", " . $info_ristorante["longitudine"]; ?></p>
+                        <button type="button" class="btn copy_button ms-3" onclick="copyText()"></button>
+                        <img id="checked_icon" src="../images/check.png" alt="copied" style="display: none;">
+                        <input id="copy_text" type="text" value="<?php echo $info_ristorante["latitudine"] . ", " . $info_ristorante["longitudine"]; ?>" hidden>
+                    </div>
+                </div>
+            </div>
             
+            <div id="rest_map_container" class="w-75 mx-auto" style="box-shadow: 0px 0px 10px 0px black; border-radius: 10px">
+                <div id="rest_map" style="height: 400px">
 
-            <div id="rest_map" style="height: 600px">
+                </div>
+                <button class="btn btn-light fw-bold" onclick="moveToLocation('rest_map', <?php echo $info_ristorante['latitudine']?>, <?php echo $info_ristorante['longitudine']?>)"> RIPOSIZIONA </button>
+            </div>
+            <div class="my-4">
+                <hr class="w-75 mx-auto">
+                <h4> Recensioni </h4>
+                <div id="ristor_reviews" class="w-50 mx-auto">
+                    <table class="table table-bordered border-warning rounded-3">
+                        <thead class='table-light'>
+                        <?php
+                            if($result = $conn -> query("SELECT r.data_rec as Data_pubblicazione, r.voto, u.username as Utente FROM recensione as r INNER JOIN utente as u ON r.id_utente = u.id_cliente WHERE id_ristorante = $id_rest")) {
+                                if($result->num_rows > 0) {
+                                    echo "<tr class='table-warning-subtle'>";
+                                    while($head = $result->fetch_field()) {
+                                        $output = $head->name;
+                                        if(str_contains($head->name, "_")) {
+                                            $output = str_replace("_", " ", $head->name); 
+                                        }
+                                        echo "<th> $output </th>";
+                                    }
+                                    echo "</tr></thead> <tbody>";
+                                    while($row = $result->fetch_assoc()) {
+                                        echo "<tr>";
+                                        foreach($row as $value) {
+                                            echo "<td> $value </td>";
+                                        }
+                                        echo "</tr>";
+                                    }
+                                } else {
+                                    echo "<tr><th> Nessuna recensione disponibile </th></tr></thead>";
+                                }
+                            } else {
+                                echo "<tr><th> ERRORE: Impossibile recuperare recensioni al momento: ".$id_rest." </th></tr>";
+                            }
+                        ?>
+                        <tr>
+                            <?php
+                                if($result = $conn->query("SELECT avg(voto) as media FROM recensione WHERE id_ristorante = $id_rest")) {
+                                    $avg = $result->fetch_assoc()["media"];
+                                    $avg = number_format($avg, 2);
+                                } else {
+                                    header("Location: ../pages/error.html");
+                                }
+                            ?>
+                            <th id="review_avg" colspan="3"></th>
+                        </tr>
+                    </table>
+                </div>
 
             </div>
 
+            <button type="button" class="btn btn-warning fw-bold" onclick="window.location.href = 'welcome.php'"> TORNA INDIETRO </button>
         </div>
 
-
+        <!--? SCRIPT DI BOOTSTRAP-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
         <!--SCRIPT LEAFLET-->
-         <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
         crossorigin=""></script>
         <!--MIO SCRIPT-->
         <script src="../javascript/map.js"></script>
+        <script src="../javascript/script.js"></script>
+        <script>
+            setAverage(<?php echo $avg ?>);
+        </script>
     </body>
 
 </html>

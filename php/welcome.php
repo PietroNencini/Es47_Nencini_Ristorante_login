@@ -273,10 +273,10 @@
         </div>
         <div id="resturant_info_space">
             <div class="bg-white w-75 mx-auto text-center p-3 rounded-5">
-                <h4> Vuoi saperne di più su un ristorante? </h4> <br>
+                <p class="fs-4"> Vuoi saperne di più su un ristorante? </p> <br>
                 <form action="rest_info.php" method="get">
                     <label for="nome_ristorante" class="form-label"> CERCALO QUI! </label>
-                    <select name="nome_ristorante" class="form-select w-25 mx-auto my-3">
+                    <select name="nome_ristorante" class="form-select w-25 mx-auto mt-3 mb-4">
                         <?php
                             if ($result = $conn->query(query: "SELECT id_ristorante AS id, nome FROM ristorante")) {
                                 if ($result->num_rows > 0) {
@@ -292,7 +292,7 @@
                             }
                         ?>
                     </select>
-                    <button type="submit" class="btn btn-success"> RICERCA </button>
+                    <button type="submit" class="btn btn-warning fw-bold"> RICERCA </button>
                 </form>
             </div>
         </div>

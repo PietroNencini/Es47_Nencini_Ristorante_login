@@ -21,13 +21,17 @@ if (!isset($_SESSION["session_user"]) || $_SESSION["session_user"] != "admin") {
     <!--* BOOTSTRAP-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!--*LEAFLET-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""/>
     <!--*CSS PERSONALE-->
     <link rel="stylesheet" type="text/css" href="../css/styles.css">
     <!--*css logout -->
     <link rel="stylesheet" type="text/css" href="../css/logout_button.css">
 </head>
 
-<body id="admin_page">
+<body id="admin_page" onload="showMap('admin_map' ,43.77311306353422, 11.255404837603264, false)">
     <header class="d-flex align-items-center justify-content-center text-white"
         style="background-color: rgb(0, 9, 145)">
         <h1 class="home_title jaini text-center"> Pagina di amministrazione </h1>
@@ -106,8 +110,21 @@ if (!isset($_SESSION["session_user"]) || $_SESSION["session_user"] != "admin") {
                 <input type="text" id="r_address" name="r_address" class="form-control">
                 <label for="r_city">Città</label>
                 <input type="text" id="r_city" name="r_city" class="form-control">
+                <div class="row">
+                    <div class="col col-md-6">
+                        <label for="r_latit">Latitudine</label>
+                        <input type="number" id="r_latit" name="r_latit" class="form-control" min="-90" max="90">
+                    </div>
+                    <div class="col col-md-6">
+                        <label for="r_longit">Longitudine</label>
+                        <input type="number" id="r_longit" name="r_longit" class="form-control" min="-180" max="180">
+                    </div>
+                </div>
                 <button type="submit" class="btn btn-primary w-25 mt-3 fw-bolder"> INSERISCI </button>
             </form> 
+            <div id="admin_map" style="height: 400px;" class="my-3 w-75 mx-auto">
+
+            </div>
         </div>
 
         <hr>
@@ -144,7 +161,12 @@ if (!isset($_SESSION["session_user"]) || $_SESSION["session_user"] != "admin") {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
+    <!--SCRIPT LEAFLET-->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""></script>
     <!--? JAVASCRIPT PERSONALE-->
+    <script src="../javascript/map.js"></script>
     <script src="../javascript/script.js"></script>
 </body>
 
