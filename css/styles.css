@@ -1,5 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Jaini&display=swap');
 
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    flex: 1; /* Riempie lo spazio tra header e footer */
+}
+
+footer {
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+}
+
 body {
     background-size: cover;
     background-position: center;
@@ -22,13 +40,6 @@ body.log_page {
 body.no-scroll {
     overflow: hidden;
     /* Disabilita lo scroll */
-}
-
-html,
-body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
 }
 
 #admin_page {
