@@ -18,6 +18,8 @@ if (!isset($_SESSION["session_user"]) || $_SESSION["session_user"] != "admin") {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login effettuato</title>
+    <!--* FAVICON -->
+    <link rel="shortcut icon" href="../images/favicons/protection.png" type="image/x-icon">
     <!--* BOOTSTRAP-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -31,7 +33,7 @@ if (!isset($_SESSION["session_user"]) || $_SESSION["session_user"] != "admin") {
     <link rel="stylesheet" type="text/css" href="../css/logout_button.css">
 </head>
 
-<body id="admin_page" onload="showMap('admin_map' ,43.77311306353422, 11.255404837603264, false)">
+<body id="admin_page" onload="showMap('admin_map' , 43.77311306353422, 11.255404837603264, false, true)">
     <header class="d-flex align-items-center justify-content-center text-white"
         style="background-color: rgb(0, 9, 145)">
         <h1 class="home_title jaini text-center"> Pagina di amministrazione </h1>
@@ -45,7 +47,7 @@ if (!isset($_SESSION["session_user"]) || $_SESSION["session_user"] != "admin") {
             <?php
                 switch ($_SESSION["error_code"]) {
                     case -3:
-                        $output = "<p class='text-center fs-4 '> Ristorante inserito con successo </p>";
+                        $output = "<p class='text-center fs-4 bg-success-subtle fw-bold rounded-3 mt-2 mb-3 fs-3'> Ristorante inserito con successo </p>";
                         break;
                     case 0:
                         $output = "";
@@ -105,19 +107,19 @@ if (!isset($_SESSION["session_user"]) || $_SESSION["session_user"] != "admin") {
             <h4 class="text-center my-2"> INSERIMENTO RISTORANTI </h4>
             <form action="./scripts/rest_insert.php" method="post" class="w-50 mx-auto">
                 <label for="r_name">Nome</label>
-                <input type="text" id="r_name" name="r_name" class="form-control">
+                <input type="text" id="r_name" name="r_name" class="form-control" required>
                 <label for="r_address">Indirizzo</label>
-                <input type="text" id="r_address" name="r_address" class="form-control">
+                <input type="text" id="r_address" name="r_address" class="form-control" required>
                 <label for="r_city">Città</label>
-                <input type="text" id="r_city" name="r_city" class="form-control">
+                <input type="text" id="r_city" name="r_city" class="form-control" required>
                 <div class="row">
                     <div class="col col-md-6">
                         <label for="r_latit">Latitudine</label>
-                        <input type="number" id="r_latit" name="r_latit" class="form-control" min="-90" max="90">
+                        <input type="number" id="r_latit" name="r_latit" class="form-control latlng_input" min="-90" max="90" step="0.00000000000001" required>
                     </div>
                     <div class="col col-md-6">
                         <label for="r_longit">Longitudine</label>
-                        <input type="number" id="r_longit" name="r_longit" class="form-control" min="-180" max="180">
+                        <input type="number" id="r_longit" name="r_longit" class="form-control latlng_input" min="-180" max="180" step="0.00000000000001" required>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary w-25 mt-3 fw-bolder"> INSERISCI </button>

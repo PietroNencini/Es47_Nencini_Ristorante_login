@@ -11,6 +11,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--* FAVICON -->
+    <link rel="shortcut icon" href="../images/favicons/add-user.png" type="image/x-icon">
     <!--* TITOLO DELLA PAGINA-->
     <title>Risto & rece</title>
     <!--* FAVICON-->
@@ -20,7 +22,7 @@
     <!--* CSS PERSONALE-->
     <link rel="stylesheet" href="../css/styles.css">
 </head>
-<body class="log_page">
+<body class="log_page has_footer">
     <header class="d-flex align-items-center justify-content-center bg-warning">
         <span><img id="icon" src="../images/logo.png" alt="risto&rece" width=96px" class="d-block mx-auto"></span>
         <h1 class="home_title jaini text-center"> RISTO&RECE </h1>

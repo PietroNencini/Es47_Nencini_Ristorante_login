@@ -16,7 +16,7 @@
     $insert = "INSERT INTO ristorante(nome, indirizzo, citta) VALUES ('$rest_name', '$rest_address', '$rest_city')";
     if($conn->query($insert)) {
         $_SESSION["error_code"] = 8;
-        if($conn->query(query: $rest_address) && $conn->affected_rows > 0) {
+        if($conn->affected_rows > 0) {
             $_SESSION["error_code"] = -3;
         }
         header("Location: ../admin_panel.php");
