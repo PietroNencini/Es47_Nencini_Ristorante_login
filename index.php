@@ -21,47 +21,49 @@
     <link rel="stylesheet" href="./css/styles.css">
 </head>
 <body class="log_page has_footer">
-    <div class="content">
-        <header class="d-flex align-items-center justify-content-center bg-warning">
+    <header class="d-flex align-items-center justify-content-center bg-warning">
             <span><img id="icon" src="./images/logo.png" alt="risto&rece" width=96px" class="d-block mx-auto"></span>
             <h1 class="home_title jaini text-center"> RISTO&RECE </h1>
-        </header>
-        <div id="home_form_container" class="w-75 mx-auto bg-secondary-subtle p-4 mt-4">
+    </header>
+    <div class="content">
+        <div class="d-flex align-items-center justify-content-center">
+            <div id="home_form_container" class="w-75 mx-auto bg-secondary-subtle p-4">
 
-            <div id="form_inside" class="w-50 bg-white  rounded-3 p-3 mx-auto my-5">
-                <form id="login_form" action="php/scripts/login_script.php" method="post">
-                    <label for="username" class="form-label">Nome utente</label>
-                    <input type="text" name="username" id="username" class="form_input form-control" minlength="4" required>
+                <div id="form_inside" class="w-50 bg-white  rounded-3 p-3 mx-auto my-5">
+                    <form id="login_form" action="php/scripts/login_script.php" method="post">
+                        <label for="username" class="form-label">Nome utente</label>
+                        <input type="text" name="username" id="username" class="form_input form-control" minlength="4" required>
 
-                    <label for="password" class="form-label"> Password</label>
-                    <input type="password" name="password" id="password" class="form_input form-control" minlength="8" required>
-                
-                    <button type="submit" class="btn btn-warning fw-bold my-3"> ACCEDI </button>
-                </form>
+                        <label for="password" class="form-label"> Password</label>
+                        <input type="password" name="password" id="password" class="form_input form-control" minlength="8" required>
+                    
+                        <button type="submit" class="btn btn-warning fw-bold my-3"> ACCEDI </button>
+                    </form>
 
-                <?php 
-                    if (isset($_SESSION["error_code"])) {
-                        $error = true;
-                        switch($_SESSION["error_code"]) {
-                            case 1:
-                                $output = "Utente non trovato";
-                                break;
-                            case 2:
-                                $output = "Password errata";
-                                break;
-                            default:
-                                $error = false;
+                    <?php 
+                        if (isset($_SESSION["error_code"])) {
+                            $error = true;
+                            switch($_SESSION["error_code"]) {
+                                case 1:
+                                    $output = "Utente non trovato";
+                                    break;
+                                case 2:
+                                    $output = "Password errata";
+                                    break;
+                                default:
+                                    $error = false;
+                            }
+                            if($error)
+                                echo "<p class='bg-danger text-white fw-bold text-center rounded-3 mt-2 mb-3 fs-5'> ERRORE: $output </p>";
+                            unset($_SESSION["error_code"]);
                         }
-                        if($error)
-                            echo "<p class='bg-danger text-white fw-bold text-center rounded-3 mt-2 mb-3 fs-5'> ERRORE: $output </p>";
-                        unset($_SESSION["error_code"]);
-                    }
-                ?>
+                    ?>
 
-                <p class="my-3"> Non hai un account? <a href="./php/registration.php"> Registrati ora </a> </p>
-            </div>    
+                    <p class="my-3"> Non hai un account? <a href="./php/registration.php"> Registrati ora </a> </p>
+                </div>    
+            </div>
         </div>
-    </div>
+    </di>
     
 
 

@@ -7,7 +7,8 @@
         $_SESSION["error_code"] = 0;
     }
     if (!isset($_SESSION["session_user"])) {         //? Nel caso si accedesse a questa pagina senza aver fatto il login
-        header(header: "Location: ../index.php");
+        //header(header: "Location: ../index.php");
+        echo "Faccio schifo";
         exit;
     }
 
@@ -27,8 +28,6 @@
         header("Location: ../pages/error.html");
         exit;
     }
-
-
 
     $info_list = ["USERNAME", "NOME", "COGNOME", "EMAIL", "MEMBRO DAL"];
 ?>
@@ -54,7 +53,7 @@
     <link rel="stylesheet" type="text/css" href="../css/stars.css">
 </head>
 
-<body id="personal_page">
+<body id="personal_page" class="has_footer">
 
     <header class="d-flex align-items-center justify-content-center bg-warning">
         <span><img id="icon" src="../images/logo.png" alt="risto&rece" width="96px" class="d-block mx-auto"></span>
@@ -62,7 +61,7 @@
     </header>
 
     <div id="results_container"
-        class="my-5 border border-1 border-black rounded-4 p-3 mx-auto w-75 bg-secondary-subtle shadow-lg">
+        class="my-5 border rounded-4 p-3 mx-auto w-75 bg-secondary-subtle">
         <?php
             switch ($_SESSION["error_code"]) {
                 case 0:
@@ -122,7 +121,8 @@
                                 include "./scripts/utils.php";
                                 $required_id = getUserIDByUsername($logged_user);
                                 $rev_query = "SELECT RT.nome AS Ristorante, RT.Indirizzo, RV.voto as Valutazione, RV.data_rec as Data FROM recensione RV INNER JOIN ristorante RT ON RV.id_ristorante = RT.id_ristorante WHERE RV.id_utente = $required_id";
-                                if ($rev_result = $conn->query(query: $rev_query)) {
+                                $rev_result = $rev_result = $conn->query(query: $rev_query);
+                                if ($rev_result) {
                                     $num_rec_output = "<p class='fs-4 text-center'> Recensioni totali: $rev_result->num_rows </p>";
                                     if ($rev_result->num_rows > 0) {
                                         echo "<thead class='table-light'> <tr class='table-warning-subtle'>";
@@ -142,7 +142,7 @@
                                         echo $num_rec_output;
                                     }
                                 } else {
-                                    echo "ERRORE: Impossibile trovare recensioni";
+                                    echo "ERRORE: $conn->error";
                                 }
                             ?>
                         </table>
@@ -335,6 +335,7 @@
         crossorigin="anonymous"></script>
     <!--? JAVASCRIPT PERSONALE-->
     <script src="../javascript/script.js"></script>
+    <script src="../javascript/footer.js"></script>
 </body>
 
 </html>

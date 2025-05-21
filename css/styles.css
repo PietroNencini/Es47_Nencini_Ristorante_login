@@ -9,7 +9,15 @@ html, body {
 }
 
 .content {
-    flex: 1; /* Riempie lo spazio tra header e footer */
+    min-height: 75vh;
+    display: flex;
+    flex-direction: column; /* Riempie lo spazio tra header e footer */
+    justify-content: center;
+}
+
+.content > * {
+    flex: 1;
+    flex-grow: 0;
 }
 
 footer {
@@ -57,6 +65,7 @@ h1.home_title {
 }
 
 #home_form_container {
+    margin: auto;
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.8);
     border-radius: 1rem;
 }
@@ -93,6 +102,10 @@ input[type="number"]:focus {
 
 #results_container>h3 {
     background-color: rgba(25, 135, 84, 0.5);
+}
+
+#results_container {
+    box-shadow: 0px 20px 20px rgba(0, 0, 0, 0.8);
 }
 
 #reviews_space *,

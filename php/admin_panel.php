@@ -1,13 +1,36 @@
 <?php
 
-session_start();
+    function getOut() {
+        session_destroy();
+        header("Location: ../index.php");
+        exit;
+    }
 
-include "connection.php";
+    session_start();
 
-if (!isset($_SESSION["session_user"]) || $_SESSION["session_user"] != "admin") {
-    header("Location: ../index.php");
-    exit;
-}
+    include "connection.php";
+
+    $permit_admin = [];
+
+    if(!isset($_SESSION["error_code"]))
+        $_SESSION["error_code"] = 0;
+
+    if(!isset($_SESSION["session_user"])) {
+        getOut();
+    }
+
+    if($result = $conn->query("SELECT username FROM utente WHERE is_admin = 1")) {
+        while($row = $result->fetch_assoc()) {
+            array_push($permit_admin, $row["username"]);
+        }
+    } else {
+        header("Location: ../pages/error.html");
+        exit;
+    }
+
+    if (in_array($_SESSION["session_user"], $permit_admin) == false) {
+        getOut();
+    }
 ?>
 
 <!DOCTYPE html>
@@ -59,7 +82,7 @@ if (!isset($_SESSION["session_user"]) || $_SESSION["session_user"] != "admin") {
                         $output = "<p class='bg-danger text-white fw-bold text-center rounded-3 mt-2 mb-3 fs-3'> ERRORE: impossibile connettersi al servizio </p>";
                         break;
                     default:
-                        echo "ERRORE";
+                        getOut();
                         exit;
                 }
                 echo $output;

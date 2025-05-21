@@ -28,7 +28,7 @@
         <h1 class="home_title jaini text-center"> RISTO&RECE </h1>
     </header>
 
-    <div id="home_form_container" class="w-75 mx-auto bg-secondary-subtle p-4 mt-4">
+    <div id="home_form_container" class="w-75 mx-auto bg-secondary-subtle p-4 my-4">
 
         <div id="form_inside" class="w-50 rounded-3 p-3 mx-auto my-5 bg-white">
             <h3 class="text-center"> REGISTRAZIONE NUOVO UTENTE </h3>

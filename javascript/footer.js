@@ -5,7 +5,7 @@ if(space[0].classList.contains("has_footer")) {
 
 function createFooter() {
     let footer = document.createElement("footer");
-    footer.className = "bg-warning py-4 mt-5";
+    footer.className = "bg-warning py-4";
     
     let container = document.createElement("div");
     container.className = "container text-center text-md-start";
