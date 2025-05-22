@@ -5,7 +5,7 @@
     include "../connection.php";
 
     if (!isset($_SESSION["session_user"]) || $_SESSION["session_user"] != "admin") {
-        header("Location: ../index.php");
+        header("Location: ../../index.php");
         exit;
     }
 

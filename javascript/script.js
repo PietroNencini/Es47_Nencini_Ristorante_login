@@ -51,4 +51,8 @@ function setAverage(avg) {
     }
 }
 
+function manageDeleteButton() {
+    let button = document.querySelector("deleteButContainer > button")[0];
+    console.log(button.innerHTML);
+}
 

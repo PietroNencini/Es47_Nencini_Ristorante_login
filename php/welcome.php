@@ -51,6 +51,9 @@
     <link rel="stylesheet" type="text/css" href="../css/logout_button.css">
     <!--*CSS STELLINE-->
     <link rel="stylesheet" type="text/css" href="../css/stars.css">
+    <!--*CSS PULSANTE ELIMINA-->
+    <link rel="stylesheet" href="../css/delete_button.css">
+    
 </head>
 
 <body id="personal_page" class="has_footer">
@@ -114,39 +117,59 @@
         <div id="reviews_space">
             <div class="row">
                 <div class="col-12 col-lg-6">
-                    <div id="rev_table_container" class="w-100 mx-auto px-5 rounded-3">
-                        <table id="revs_table" class="table table-bordered border-warning rounded-3"
-                            style="border-radius: 0.3rem !important;">
-                            <?php
-                                include "./scripts/utils.php";
-                                $required_id = getUserIDByUsername($logged_user);
-                                $rev_query = "SELECT RT.nome AS Ristorante, RT.Indirizzo, RV.voto as Valutazione, RV.data_rec as Data FROM recensione RV INNER JOIN ristorante RT ON RV.id_ristorante = RT.id_ristorante WHERE RV.id_utente = $required_id";
-                                $rev_result = $rev_result = $conn->query(query: $rev_query);
-                                if ($rev_result) {
-                                    $num_rec_output = "<p class='fs-4 text-center'> Recensioni totali: $rev_result->num_rows </p>";
-                                    if ($rev_result->num_rows > 0) {
-                                        echo "<thead class='table-light'> <tr class='table-warning-subtle'>";
-                                        while ($field = $rev_result->fetch_field()) {
-                                            echo "<th> $field->name </th>";
-                                        }
-                                        echo "</tr> </thead> <tbody>";
-                                        while ($row = $rev_result->fetch_assoc()) {
-                                            echo "<tr>";
-                                            foreach ($row as $value) {
-                                                echo "<td> $value </td>";
+                    <form action="./scripts/delete_review.php" method="post" >
+
+
+                        <div id="rev_table_container" class="w-100 mx-auto px-5 rounded-3">
+                            <table id="revs_table" class="table table-bordered border-warning rounded-3"
+                                style="border-radius: 0.3rem !important;">
+                                <?php
+                                    include "./scripts/utils.php";
+                                    $required_id = getUserIDByUsername($logged_user);
+                                    $rev_query = "SELECT RT.nome AS Ristorante, RT.Indirizzo, RV.voto as Valutazione, RV.data_rec as Data, RV.id_recensione as ID  FROM recensione RV INNER JOIN ristorante RT ON RV.id_ristorante = RT.id_ristorante WHERE RV.id_utente = $required_id";
+                                    $rev_result = $rev_result = $conn->query(query: $rev_query);
+                                    if ($rev_result) {
+                                        $num_rec_output = "<p class='fs-4 text-center'> Recensioni totali: $rev_result->num_rows </p>";
+                                        if ($rev_result->num_rows > 0) {
+                                            echo "<thead class='table-light'> <tr class='table-warning-subtle'>";
+                                            while ($field = $rev_result->fetch_field()) {
+                                                if($field->name != "ID") {
+                                                    echo "<th> $field->name </th>";
+                                                }
                                             }
-                                            echo "</tr>";
+                                            echo " <th> SELEZIONA </th> ";
+                                            echo "</tr> </thead> <tbody>";
+                                            while ($row = $rev_result->fetch_assoc()) {
+                                                echo "<tr>";
+                                                foreach ($row as $key => $value) {
+                                                    if($key != "ID") {
+                                                        echo "<td> $value </td>";
+                                                    }
+                                                }
+                                                echo "<td> <div class='form-check mx-auto'>
+                                                        <input name='deleteRev[]' class='form-check-input' type='checkbox' value='$row[ID]'>
+                                                    </div> </td>";
+                                                echo "</tr>";
+                                            }
+                                            echo "<tr> <td colspan='$rev_result->field_count'> $num_rec_output </td> </tr> </tbody>";
+                                        } else {
+                                            echo $num_rec_output;
                                         }
-                                        echo "<tr> <td colspan='4'> $num_rec_output </td> </tr> </tbody>";
                                     } else {
-                                        echo $num_rec_output;
+                                        echo "ERRORE: $conn->error \n $rev_query";
                                     }
-                                } else {
-                                    echo "ERRORE: $conn->error";
-                                }
-                            ?>
-                        </table>
-                    </div>
+                                ?>
+                            </table>
+                            <div id="deleteButContainer">
+                                <button class="btn btn-secondary" type="submit" disabled>
+                                    <span><i class="bi bi-trash3-fill"></i></span>
+                                    Elimina
+                                </button>
+                            </div>
+                        </div>
+                            
+
+                    </form>
                 </div>
                 <div class="col-12 col-lg-6">
                     <aside class="p-2 bg-white text-center rounded-5">
