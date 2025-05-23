@@ -52,7 +52,14 @@ function setAverage(avg) {
 }
 
 function manageDeleteButton() {
-    let button = document.querySelector("deleteButContainer > button")[0];
-    console.log(button.innerHTML);
+    let button = document.getElementById("delete_review_button");
+    let checkboxes = document.getElementsByClassName("del_rev");
+    for(let i = 0; i < checkboxes.length; i++) {
+        if(checkboxes[i].checked) {
+            button.disabled = false;
+            return;
+        }
+    }
+    button.disabled = true;
 }
 

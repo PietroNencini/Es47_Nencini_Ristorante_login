@@ -147,7 +147,7 @@
                                                     }
                                                 }
                                                 echo "<td> <div class='form-check mx-auto'>
-                                                        <input name='deleteRev[]' class='form-check-input' type='checkbox' value='$row[ID]'>
+                                                        <input name='deleteRev[]' class='form-check-input del_rev' type='checkbox' value='$row[ID]' onclick='manageDeleteButton()'>
                                                     </div> </td>";
                                                 echo "</tr>";
                                             }
@@ -156,15 +156,22 @@
                                             echo $num_rec_output;
                                         }
                                     } else {
-                                        echo "ERRORE: $conn->error \n $rev_query";
+                                        echo "ERRORE: $conn->error \n";
                                     }
                                 ?>
                             </table>
-                            <div id="deleteButContainer">
-                                <button class="btn btn-secondary" type="submit" disabled>
+                            <div class="text-center">
+                                <button id="delete_review_button" class="btn btn-secondary d-block mx-auto" type="submit" disabled>
                                     <span><i class="bi bi-trash3-fill"></i></span>
                                     Elimina
-                                </button>
+                                </button> <br>
+
+                                <?php
+                                    if(isset($_SESSION["deleted_reviews"])) {
+                                        echo "<p> Eliminate di recente: $_SESSION[deleted_reviews] </p>";
+                                    }
+                                    unset($_SESSION["deleted_reviews"]);
+                                ?>
                             </div>
                         </div>
                             
