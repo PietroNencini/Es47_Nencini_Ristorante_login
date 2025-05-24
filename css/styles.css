@@ -95,7 +95,7 @@ input[type="number"]:focus {
     margin-bottom: 0.5rem;
 }
 
-#results_container *:not(#reviews_space *):not(#resturant_info_space *) {
+#results_container *:not(#reviews_space *):not(#resturant_info_space *):not(#change_pw_container *) {
     margin-top: 2rem;
     margin-bottom: 2rem;
 }

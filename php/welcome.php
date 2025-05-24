@@ -7,8 +7,7 @@
         $_SESSION["error_code"] = 0;
     }
     if (!isset($_SESSION["session_user"])) {         //? Nel caso si accedesse a questa pagina senza aver fatto il login
-        //header(header: "Location: ../index.php");
-        echo "Faccio schifo";
+        header(header: "Location: ../index.php");
         exit;
     }
 
@@ -73,13 +72,18 @@
                 case -2:
                     $output = "<p class='text-center fs-4'> Grazie per la tua recensione, <span class='fw-bold'> $logged_user </span> </p>";
                     break;
+                case -4:
+                    $output = "<p class='text-center fs-4'> Password modificata con successo </p>";
+                    break;
                 case 3:
                     $output = "<p class='bg-danger text-white fw-bold text-center rounded-3 mt-2 mb-3 fs-3'> ERRORE: impossibile inserire la recensione, controlla i dati e riprova </p>";
                     break;
                 case 7:
                     $output = "<p class='bg-danger text-white fw-bold text-center rounded-3 mt-2 mb-3 fs-3'> ERRORE: Hai già dato una recensione al ristorante " . $_SESSION["rest_error"] . " </p>";
                     break;
-                default:
+                case 9:
+                    $output = "<p class='bg-danger text-white fw-bold text-center rounded-3 mt-2 mb-3 fs-3'> ERRORE: Password non valida o uguale alla precedente </p>";
+                    default:
                     echo "ERRORE";
                     exit;
             }
@@ -112,6 +116,13 @@
                 }
                 ?>
             </ul>
+        </div>
+        <div id="change_pw_container" class="text-center">
+            <button id="button_to_delete" type="button" class="btn btn-warning fw-bold" onclick="managePwChangeForm()"> CAMBIO PASSWORD </button>
+            <form action="./scripts/change_password.php" method="post" class="d-none" id="change_pw_form">
+                <label for="new_password"><input type="password" name="new_password" class="form-control" placeholder="nuova password..." minlength="8" required></label>
+                <button type="submit" class="btn btn-warning fw-bold"> CAMBIA </button>
+            </form>
         </div>
         <hr>
         <div id="reviews_space">

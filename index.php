@@ -60,6 +60,9 @@
                     ?>
 
                     <p class="my-3"> Non hai un account? <a href="./php/registration.php"> Registrati ora </a> </p>
+
+                    <!--in progress-->
+                    <p class="my-3"><a href="#" onclick="document.write('<p>mi dispiace</p>')"> Password dimenticata</a>?</p>
                 </div>    
             </div>
         </div>

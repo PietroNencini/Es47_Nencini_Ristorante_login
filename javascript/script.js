@@ -63,3 +63,10 @@ function manageDeleteButton() {
     button.disabled = true;
 }
 
+
+
+function managePwChangeForm() {
+    hide("button_to_delete");
+    show("change_pw_form", "block");
+}
+

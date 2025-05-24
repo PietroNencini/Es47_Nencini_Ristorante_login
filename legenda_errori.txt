@@ -8,5 +8,7 @@
 6: Dati mancanti lato server (ad esempio se non è presente alcun ristorante)
 7: Recensione già inserita per quel dato ristorante
 8: ristorante già presente o non aggiungibile
+9: Password uguale alla precedente o non valida
 -2: recensione inserita con successo (da distinguere rispetto allo 0)
 -3: ristorante inserito con successo (//)
+-4: Password modificata con successo
