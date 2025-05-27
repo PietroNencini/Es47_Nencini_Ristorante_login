@@ -73,10 +73,10 @@
                     <div class="collapse navbar-collapse ps-3" id="navbarNav">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Area Personale</a>
+                                <a class="nav-link active" aria-current="page" href="#">Homepage</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Features</a>
+                                <a class="nav-link" href="#">Area Personale</a>
                             </li>
                             
                         </ul>

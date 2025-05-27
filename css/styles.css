@@ -45,15 +45,14 @@ body.log_page {
     background-image: url("../images/personal.jpg");
 }
 
-body.no-scroll {
-    overflow: hidden;
-    /* Disabilita lo scroll */
-}
-
 #admin_page {
     background-image: url("../images/server_hall.jpg");
 }
 
+body.no-scroll {
+    overflow: hidden;
+    /* Disabilita lo scroll */
+}
 .jaini {
     font-family: "Jaini", system-ui;
     font-weight: 400;

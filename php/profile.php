@@ -41,7 +41,7 @@
         <link rel="stylesheet" href="../css/delete_button.css">
         
     </head>
-    <body>
+    <body id="">
         
         <div id="user_info_container">
 
@@ -49,7 +49,8 @@
                 <p class=" fw-bold fs-4 "> Informazioni utente </p>
                 <ul id="user_info" style="list-style-type: none;">
                     <?php
-                    $query = "SELECT username, nome, cognome, email, data_reg FROM utente WHERE username = '$logged_user'";
+                    $query = "SELECT U.username as USERNAME, U.nome as NOME, U.cognome as COGNOME, U.email AS EMAIL, U.data_reg as MEMBRO DAL, count(R.id_utente) as RECENSIONI:  
+                            FROM utente U INNER JOIN recensione R ON U.id_utente = R.id_utente WHERE U.username = '$logged_user'";
                     if ($result = $conn->query(query: $query)) {
                         if ($result->num_rows > 0) {
                             while ($row = $result->fetch_assoc()) {
@@ -80,6 +81,8 @@
 
         </div>
 
+        <script src="../javascript/script.js"></script>
+        <script src="../javascript/footer.js"></script>
     </body>
 
 </html>
