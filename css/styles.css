@@ -114,6 +114,31 @@ input[type="number"]:focus {
     margin-bottom: 0.5rem;
 }
 
+.nav-link {
+    height: 48px !important; /* Regola in base alle dimensioni della navbar */
+    display: flex;
+    align-items: center;
+}
+
+div.profile_elements {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+#profile_icon {
+    opacity: 0.6;
+}
+
+#profile_icon:hover {
+    opacity: 1;
+    transition: 0.5s;
+}
+
+.navbar-nav {
+    gap: 1rem;
+}
+
 @media only screen and (max-width: 992px) {
     #login_made {
         width: 75% !important;
@@ -132,8 +157,8 @@ input[type="number"]:focus {
         width: 100% !important;
     }
 
-    #icon {
-        width: 64px;
+    .icon {
+        width: 64px !important;
     }
 
     #login_form button[type="submit"] {

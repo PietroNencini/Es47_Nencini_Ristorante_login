@@ -28,7 +28,6 @@
         exit;
     }
 
-    $info_list = ["USERNAME", "NOME", "COGNOME", "EMAIL", "MEMBRO DAL"];
 ?>
 
 <!DOCTYPE html>
@@ -57,20 +56,73 @@
 
 <body id="personal_page" class="has_footer">
 
-    
+    <header class="w-100 bg-warning">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg sticky-top">
+                <div class="container-fluid fs-5">
+                    <a class="navbar-brand jaini text-center" href="#">
+                        <span style="font-size: 3rem;">
+                            <img src="../images/logo.png" alt="risto&rece" width="96px"
+                            class="d-inline-block align-text-center">
+                        RISTO&RECE </span>
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse ps-3" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="#">Area Personale</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Features</a>
+                            </li>
+                            
+                        </ul>
+                        <div class="ms-auto" role="search">
+                            <div class="profile_elements">
+                                <a class="nav-link" href="profile.php">
+                                    <span class="d-flex align-items-center"></span>
+                                        <i class="bi bi-person-fill" style="font-size: 3rem;" id="profile_icon"></i>
+                                    </span>
+                                </a>
+                            
+                                <!--<button id="logout_button" type="submit" class="w-25 btn btn-danger fw-bold fs-5 d-block mx-auto" onclick="show('logout-box', 'flex'), disable_scroll()"> LOGOUT </button>-->
+                                <!-- From Uiverse.io by vinodjangid07 -->
+                                <button id="logout_button" class="Btn mx-auto" onclick="show('logout-box', 'flex'), disable_scroll()">
+                                    <div class="sign">
+                                        <svg viewBox="0 0 512 512">
+                                            <path
+                                                d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z">
+                                            </path>
+                                        </svg>
+                                    </div>
+                                    <div class="text">Logout</div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
 
 
+    <!--
     <header class="d-flex align-items-center justify-content-center bg-warning">
         <span><img id="icon" src="../images/logo.png" alt="risto&rece" width="96px" class="d-block mx-auto"></span>
         <h1 class="home_title jaini text-center"> RISTO&RECE </h1>
     </header>
+    -->
 
     <div id="results_container"
         class="my-5 border rounded-4 p-3 mx-auto w-75 bg-secondary-subtle">
+        <h2 class="text-center"> LA MIA AREA </h2>
         <?php
             switch ($_SESSION["error_code"]) {
                 case 0:
-                    $output = "<h3 class='text-center p-3 w-25 mx-auto rounded-3 text-white' id='login_made'> ACCESSO EFFETTUATO </h3> <p class='text-center fs-4 '> Benvenuto <span class='fw-bold'> $logged_user </span> </p>";
+                    $output = "";
                     break;
                 case -2:
                     $output = "<p class='text-center fs-4'> Grazie per la tua recensione, <span class='fw-bold'> $logged_user </span> </p>";
@@ -97,37 +149,7 @@
 
         <hr>
 
-        <div id="info_container" class="w-50 mx-auto">
-            <p class=" fw-bold fs-4 "> Informazioni utente </p>
-            <ul id="user_info" style="list-style-type: none;">
-                <?php
-                $query = "SELECT username, nome, cognome, email, data_reg FROM utente WHERE username = '$logged_user' ";
-                if ($result = $conn->query(query: $query)) {
-                    if ($result->num_rows > 0) {
-                        while ($row = $result->fetch_assoc()) {
-                            $count = 0;
-                            foreach ($row as $value) {
-                                echo "<li>" . $info_list[$count] . ": <b> $value </b></li>";
-                                $count++;
-                            }
-                        }
-                    } else {
-                        echo "non funge";
-                    }
-                } else {
-                    echo "c'è un problema";
-                }
-                ?>
-            </ul>
-        </div>
-        <div id="change_pw_container" class="text-center">
-            <button id="button_to_delete" type="button" class="btn btn-warning fw-bold" onclick="managePwChangeForm()"> CAMBIO PASSWORD </button>
-            <form action="./scripts/change_password.php" method="post" class="d-none" id="change_pw_form">
-                <label for="new_password"><input type="password" name="new_password" class="form-control" placeholder="nuova password..." minlength="8" required></label>
-                <button type="submit" class="btn btn-warning fw-bold"> CAMBIA </button>
-            </form>
-        </div>
-        <hr>
+        
         <div id="reviews_space">
             <div class="row">
                 <div class="col-12 col-lg-6">
@@ -342,19 +364,6 @@
                 </form>
             </div>
         </div>
-        <hr>
-        <!--<button id="logout_button" type="submit" class="w-25 btn btn-danger fw-bold fs-5 d-block mx-auto" onclick="show('logout-box', 'flex'), disable_scroll()"> LOGOUT </button>-->
-        <!-- From Uiverse.io by vinodjangid07 -->
-        <button id="logout_button" class="Btn mx-auto" onclick="show('logout-box', 'flex'), disable_scroll()">
-            <div class="sign">
-                <svg viewBox="0 0 512 512">
-                    <path
-                        d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z">
-                    </path>
-                </svg>
-            </div>
-            <div class="text">Logout</div>
-        </button>
     </div>
 
     <!--finestra di LOGOUT (si apre al click del pulsante prima)-->

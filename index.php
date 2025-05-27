@@ -25,50 +25,19 @@ if (!isset($_SESSION["error_code"]))
 
 <body class="log_page has_footer">
 
-    <header class="w-100 bg-warning">
-        <div class="container">
-            <nav class="navbar navbar-expand-lg sticky-top">
-                <div class="container-fluid fs-5">
-                    <a class="navbar-brand jaini text-center" href="#">
-                        <span style="font-size: 3rem;">
-                            <img src="./images/logo.png" alt="risto&rece" width=96px"
-                            class="d-inline-block align-text-center">
-                        RISTO&RECE </span>
-                    </a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Features</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Pricing</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </div>
-    </header>
-    <!--
+    
+    
     <header class="d-flex align-items-center justify-content-center bg-warning">
         <span><img id="icon" src="./images/logo.png" alt="risto&rece" width=96px" class="d-block mx-auto"></span>
         <h1 class="home_title jaini text-center"> RISTO&RECE </h1>
     </header>
-    -->
+    
 
     <div class="content">
         <div class="d-flex align-items-center justify-content-center">
             <div id="home_form_container" class="w-75 mx-auto bg-secondary-subtle p-4">
+
+                <p class="text-center fs-5"> Inserisci le credenziali per accedere alle tue risorse e sfruttare le funzionalità del nostro servizio </p>
 
                 <div id="form_inside" class="w-50 bg-white  rounded-3 p-3 mx-auto my-5">
                     <form id="login_form" action="php/scripts/login_script.php" method="post">
