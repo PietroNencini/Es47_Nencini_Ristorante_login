@@ -136,10 +136,6 @@ input[type="number"]:focus {
         width: 64px;
     }
 
-    h1.home_title {
-        font-size: 4rem;
-    }
-
     #login_form button[type="submit"] {
         margin-top: 3rem !important;
     }
