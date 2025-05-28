@@ -77,7 +77,7 @@ if (!isset($_SESSION["error_code"]))
                 </div>
             </div>
         </div>
-        </di>
+    </div>
 
 
 

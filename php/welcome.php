@@ -49,8 +49,6 @@
     <link rel="stylesheet" type="text/css" href="../css/logout_button.css">
     <!--*CSS STELLINE-->
     <link rel="stylesheet" type="text/css" href="../css/stars.css">
-    <!--*CSS PULSANTE ELIMINA-->
-    <link rel="stylesheet" href="../css/delete_button.css">
     
 </head>
 
