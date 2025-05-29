@@ -58,7 +58,7 @@
         <div class="container">
             <nav class="navbar navbar-expand-lg sticky-top">
                 <div class="container-fluid fs-5">
-                    <a class="navbar-brand jaini text-center" href="#">
+                    <a class="navbar-brand jaini text-center" href="../pages/website_intro.html">
                         <span style="font-size: 3rem;">
                             <img src="../images/logo.png" alt="risto&rece" width="96px"
                             class="d-inline-block align-text-center">
@@ -71,10 +71,10 @@
                     <div class="collapse navbar-collapse ps-3" id="navbarNav">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Homepage</a>
+                                <a class="nav-link" href="../pages/website_intro.html">Homepage</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Area Personale</a>
+                                <a class="nav-link active" aria-current="page" href="#">Area Personale</a>
                             </li>
                             
                         </ul>
@@ -150,67 +150,30 @@
         
         <div id="reviews_space">
             <div class="row">
-                <div class="col-12 col-lg-6">
-                    <form action="./scripts/delete_review.php" method="post" >
-
-
-                        <div id="rev_table_container" class="w-100 mx-auto px-5 rounded-3">
-                            <table id="revs_table" class="table table-bordered border-warning rounded-3"
-                                style="border-radius: 0.3rem !important;">
-                                <?php
-                                    include "./scripts/utils.php";
-                                    $required_id = getUserIDByUsername($logged_user);
-                                    $rev_query = "SELECT RT.nome AS Ristorante, RT.Indirizzo, RV.voto as Valutazione, RV.data_rec as Data, RV.id_recensione as ID  FROM recensione RV INNER JOIN ristorante RT ON RV.id_ristorante = RT.id_ristorante WHERE RV.id_utente = $required_id";
-                                    $rev_result = $rev_result = $conn->query(query: $rev_query);
-                                    if ($rev_result) {
-                                        $num_rec_output = "<p class='fs-4 text-center'> Recensioni totali: $rev_result->num_rows </p>";
-                                        if ($rev_result->num_rows > 0) {
-                                            echo "<thead class='table-light'> <tr class='table-warning-subtle'>";
-                                            while ($field = $rev_result->fetch_field()) {
-                                                if($field->name != "ID") {
-                                                    echo "<th> $field->name </th>";
-                                                }
-                                            }
-                                            echo " <th> SELEZIONA </th> ";
-                                            echo "</tr> </thead> <tbody>";
-                                            while ($row = $rev_result->fetch_assoc()) {
-                                                echo "<tr>";
-                                                foreach ($row as $key => $value) {
-                                                    if($key != "ID") {
-                                                        echo "<td> $value </td>";
-                                                    }
-                                                }
-                                                echo "<td> <div class='form-check mx-auto'>
-                                                        <input name='deleteRev[]' class='form-check-input del_rev' type='checkbox' value='$row[ID]' onclick='manageDeleteButton()'>
-                                                    </div> </td>";
-                                                echo "</tr>";
-                                            }
-                                            echo "<tr> <td colspan='$rev_result->field_count'> $num_rec_output </td> </tr> </tbody>";
-                                        } else {
-                                            echo $num_rec_output;
+                <div class="col-12 col-lg-6"id="resturant_info_space">
+                    <div class="bg-white w-75 mx-auto text-center p-3 rounded-5">
+                        <p class="fs-4"> Vuoi saperne di più su un ristorante? </p> <br>
+                        <form action="rest_info.php" method="get">
+                            <label for="nome_ristorante" class="form-label"> CERCALO QUI! </label>
+                            <select name="nome_ristorante" class="form-select w-25 mx-auto mt-3 mb-4">
+                            <?php
+                                if ($result = $conn->query(query: "SELECT id_ristorante AS id, nome FROM ristorante")) {
+                                    if ($result->num_rows > 0) {
+                                        while ($row = $result->fetch_assoc()) {
+                                            echo "<option value='" . $row["id"] . "'> " . $row["nome"] . " </option>";
                                         }
                                     } else {
-                                        echo "ERRORE: $conn->error \n";
+                                        echo "<option value='not_available'> Nessun ristorante disponibile </option>";
                                     }
-                                ?>
-                            </table>
-                            <div class="text-center">
-                                <button id="delete_review_button" class="btn btn-secondary d-block mx-auto" type="submit" disabled>
-                                    <span><i class="bi bi-trash3-fill"></i></span>
-                                    Elimina
-                                </button> <br>
-
-                                <?php
-                                    if(isset($_SESSION["deleted_reviews"])) {
-                                        echo "<p> Eliminate di recente: $_SESSION[deleted_reviews] </p>";
-                                    }
-                                    unset($_SESSION["deleted_reviews"]);
-                                ?>
-                            </div>
-                        </div>
-                            
-
-                    </form>
+                                } else {
+                                    echo "ERRORE";
+                                    exit;
+                                }
+                            ?>
+                            </select>
+                            <button type="submit" class="btn btn-warning fw-bold"> RICERCA </button>
+                        </form>
+                    </div>
                 </div>
                 <div class="col-12 col-lg-6">
                     <aside class="p-2 bg-white text-center rounded-5">
@@ -337,30 +300,67 @@
             </div>
             <hr>
         </div>
-        <div id="resturant_info_space">
-            <div class="bg-white w-75 mx-auto text-center p-3 rounded-5">
-                <p class="fs-4"> Vuoi saperne di più su un ristorante? </p> <br>
-                <form action="rest_info.php" method="get">
-                    <label for="nome_ristorante" class="form-label"> CERCALO QUI! </label>
-                    <select name="nome_ristorante" class="form-select w-25 mx-auto mt-3 mb-4">
-                        <?php
-                            if ($result = $conn->query(query: "SELECT id_ristorante AS id, nome FROM ristorante")) {
-                                if ($result->num_rows > 0) {
-                                    while ($row = $result->fetch_assoc()) {
-                                        echo "<option value='" . $row["id"] . "'> " . $row["nome"] . " </option>";
+        <div id="review_list_space" class="w-75 mx-auto">
+            <form action="./scripts/delete_review.php" method="post" >
+
+
+                        <div id="rev_table_container" class="w-100 mx-auto px-5 rounded-3">
+                            <table id="revs_table" class="table table-bordered border-warning rounded-3"
+                                style="border-radius: 0.3rem !important;">
+                                <?php
+                                    include "./scripts/utils.php";
+                                    $required_id = getUserIDByUsername($logged_user);
+                                    $rev_query = "SELECT RT.nome AS Ristorante, RT.Indirizzo, RV.voto as Valutazione, RV.data_rec as Data, RV.id_recensione as ID  FROM recensione RV INNER JOIN ristorante RT ON RV.id_ristorante = RT.id_ristorante WHERE RV.id_utente = $required_id";
+                                    $rev_result = $rev_result = $conn->query(query: $rev_query);
+                                    if ($rev_result) {
+                                        $num_rec_output = "<p class='fs-4 text-center'> Recensioni totali: $rev_result->num_rows </p>";
+                                        if ($rev_result->num_rows > 0) {
+                                            echo "<thead class='table-light'> <tr class='table-warning-subtle'>";
+                                            while ($field = $rev_result->fetch_field()) {
+                                                if($field->name != "ID") {
+                                                    echo "<th> $field->name </th>";
+                                                }
+                                            }
+                                            echo " <th> SELEZIONA </th> ";
+                                            echo "</tr> </thead> <tbody>";
+                                            while ($row = $rev_result->fetch_assoc()) {
+                                                echo "<tr>";
+                                                foreach ($row as $key => $value) {
+                                                    if($key != "ID") {
+                                                        echo "<td> $value </td>";
+                                                    }
+                                                }
+                                                echo "<td> <div class='form-check mx-auto'>
+                                                        <input name='deleteRev[]' class='form-check-input del_rev' type='checkbox' value='$row[ID]' onclick='manageDeleteButton()'>
+                                                    </div> </td>";
+                                                echo "</tr>";
+                                            }
+                                            echo "<tr> <td colspan='$rev_result->field_count'> $num_rec_output </td> </tr> </tbody>";
+                                        } else {
+                                            echo $num_rec_output;
+                                        }
+                                    } else {
+                                        echo "ERRORE: $conn->error \n";
                                     }
-                                } else {
-                                    echo "<option value='not_available'> Nessun ristorante disponibile </option>";
-                                }
-                            } else {
-                                echo "ERRORE";
-                                exit;
-                            }
-                        ?>
-                    </select>
-                    <button type="submit" class="btn btn-warning fw-bold"> RICERCA </button>
-                </form>
-            </div>
+                                ?>
+                            </table>
+                            <div class="text-center">
+                                <button id="delete_review_button" class="btn btn-secondary d-block mx-auto" type="submit" disabled>
+                                    <span><i class="bi bi-trash3-fill"></i></span>
+                                    Elimina
+                                </button> <br>
+
+                                <?php
+                                    if(isset($_SESSION["deleted_reviews"])) {
+                                        echo "<p> Eliminate di recente: $_SESSION[deleted_reviews] </p>";
+                                    }
+                                    unset($_SESSION["deleted_reviews"]);
+                                ?>
+                            </div>
+                        </div>
+                            
+
+            </form>
         </div>
     </div>
 

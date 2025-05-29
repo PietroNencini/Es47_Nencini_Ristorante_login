@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login effettuato</title>
+    <!--* FAVICON -->
+    <link rel="shortcut icon" href="../images/favicons/user.png" type="image/x-icon">
+    <!--* BOOTSTRAP-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!--*CSS PERSONALE-->
+    <link rel="stylesheet" type="text/css" href="../css/styles.css">
+    <!--*ALTRO CSS-->
+    <link rel="stylesheet" type="text/css" href="../css/logout_button.css">
+    
+</head>
+
+<body id="info_page" class="has_footer">
+
+    <header class="w-100 bg-warning">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg sticky-top">
+                <div class="container-fluid fs-5">
+                    <a class="navbar-brand jaini text-center" href="../pages/website_intro.html">
+                        <span style="font-size: 3rem;">
+                            <img src="../images/logo.png" alt="risto&rece" width="96px"
+                            class="d-inline-block align-text-center">
+                        RISTO&RECE </span>
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse ps-3" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="../pages/website_intro.html">Homepage</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="../php/welcome.php">Area Personale</a>
+                            </li>
+                            
+                        </ul>
+                        <div class="ms-auto" role="search">
+                            <div class="profile_elements">
+                                <a class="nav-link" href="../php/profile.php">
+                                    <span class="d-flex align-items-center"></span>
+                                        <i class="bi bi-person-fill" style="font-size: 3rem;" id="profile_icon"></i>
+                                    </span>
+                                </a>
+                            
+                                <!--<button id="logout_button" type="submit" class="w-25 btn btn-danger fw-bold fs-5 d-block mx-auto" onclick="show('logout-box', 'flex'), disable_scroll()"> LOGOUT </button>-->
+                                <!-- From Uiverse.io by vinodjangid07 -->
+                                <button id="logout_button" class="Btn mx-auto" onclick="show('logout-box', 'flex'), disable_scroll()">
+                                    <div class="sign">
+                                        <svg viewBox="0 0 512 512">
+                                            <path
+                                                d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z">
+                                            </path>
+                                        </svg>
+                                    </div>
+                                    <div class="text">Logout</div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="content">
+        <div class="w-75 mx-auto bg-secondary-subtle p-5 rounded-5" id="informazioni">
+            <div class="row">
+                <div class="col col-md-6">
+                    <p class="fs-5"> Risto&Rece è il nostro servizio che permette di lasciare recensioni nei tuoi ristoranti preferiti </p>
+                    <p> Ma cosa ci fai ancora qui nella Homepage???? Moviti a mette' le recensioni</p>
+
+                </div>
+                <div class="col col-md-6">
+                    <img src="../images/icons/R&R.png" width="256px" height="256px" alt="logo" class="d-block mx-auto">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--finestra di LOGOUT (si apre al click del pulsante prima)-->
+    <div id="logout-box" class="d-none">
+        <div class="logout-content">
+            <h2> Sei sicuro di voler effettuare la disconnessione? </h2>
+            <h5> Sarà necessario ripetere l'accesso per poter tornare a questa pagina </h5>
+            <div class="buttons">
+                <form action="./scripts/logout_script.php" method="post">
+                    <button id="confirm-logout" type="submit" class="btn btn-danger"
+                        onclick="hide('logout-box'), enable_scroll()">CONFERMA</button>
+                    <button id="cancel-logout" type="button" class="btn btn-outline-danger"
+                        onclick="hide('logout-box'), enable_scroll()">ANNULLA</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="../javascript/script.js"> </script>
+    <script src="../javascript/footer.js"> </script>
+</body>
+
+</html>

@@ -74,6 +74,7 @@ if (!isset($_SESSION["error_code"]))
                     <!--in progress-->
                     <p class="my-3"><a href="#" onclick="document.write('<p>mi dispiace</p>')"> Password
                             dimenticata</a>?</p>
+                    
                 </div>
             </div>
         </div>

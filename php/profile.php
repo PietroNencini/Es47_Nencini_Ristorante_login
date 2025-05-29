@@ -42,7 +42,7 @@
             <div class="container">
                 <nav class="navbar navbar-expand-lg sticky-top">
                     <div class="container-fluid fs-5">
-                        <a class="navbar-brand jaini text-center" href="welcome.php">
+                        <a class="navbar-brand jaini text-center" href="../pages/website_intro.html">
                             <span style="font-size: 3rem;">
                                 <img src="../images/logo.png" alt="risto&rece" width="96px"
                                 class="d-inline-block align-text-center">
@@ -55,10 +55,10 @@
                         <div class="collapse navbar-collapse ps-3" id="navbarNav">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="#">Homepage</a>
+                                    <a class="nav-link" href="../pages/website_intro.html">Homepage</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Area Personale</a>
+                                    <a class="nav-link" href="welcome.php">Area Personale</a>
                                 </li>
                                 
                             </ul>

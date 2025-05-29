@@ -49,6 +49,10 @@ body.log_page {
     background-image: url("../images/server_hall.jpg");
 }
 
+#info_page {
+    background-image: url("../images/personal.jpg");
+}
+
 body.no-scroll {
     overflow: hidden;
     /* Disabilita lo scroll */
@@ -69,7 +73,7 @@ h1.home_title {
     border-radius: 1rem;
 }
 
-#rest_info_page_container {
+#rest_info_page_container, #informazioni {
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.8);
 }
 
@@ -94,7 +98,7 @@ input[type="number"]:focus {
     margin-bottom: 0.5rem;
 }
 
-#results_container *:not(#reviews_space *):not(#resturant_info_space *):not(#change_pw_container *) {
+#results_container *:not(#reviews_space *):not(#resturant_info_space *):not(#review_list_space *) {
     margin-top: 2rem;
     margin-bottom: 2rem;
 }
