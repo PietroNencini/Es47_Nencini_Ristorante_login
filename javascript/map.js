@@ -3,6 +3,16 @@ const DEFAULT_ZOOM = 17
 let maps = {};
 let markerGroup = {};
 
+function getCoordinates(id_ristorante) {
+    fetch("../php/scripts/get_coordinates.php?id_ristorante=" + id_ristorante, {
+        method: GET,
+    })
+    .then(response => response.json())
+    .then(() => {
+        return 
+    })
+}
+
 function showMap(mapId, latit, longit, marker = true, clickable = false){  
     console.log(mapId);
     if(!maps[mapId]) {

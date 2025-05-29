@@ -150,12 +150,12 @@
         
         <div id="reviews_space">
             <div class="row">
-                <div class="col-12 col-lg-6"id="resturant_info_space">
-                    <div class="bg-white w-75 mx-auto text-center p-3 rounded-5">
+                <div class="col-12 col-lg-6" id="resturant_info_space">
+                    <aside class="bg-white w-75 mx-auto text-center p-3 rounded-5 h-100">
                         <p class="fs-4"> Vuoi saperne di più su un ristorante? </p> <br>
                         <form action="rest_info.php" method="get">
                             <label for="nome_ristorante" class="form-label"> CERCALO QUI! </label>
-                            <select name="nome_ristorante" class="form-select w-25 mx-auto mt-3 mb-4">
+                            <select name="nome_ristorante" class="form-select w-50 mx-auto mt-3 mb-4">
                             <?php
                                 if ($result = $conn->query(query: "SELECT id_ristorante AS id, nome FROM ristorante")) {
                                     if ($result->num_rows > 0) {
@@ -173,10 +173,10 @@
                             </select>
                             <button type="submit" class="btn btn-warning fw-bold"> RICERCA </button>
                         </form>
-                    </div>
+                    </aside>
                 </div>
-                <div class="col-12 col-lg-6">
-                    <aside class="p-2 bg-white text-center rounded-5">
+                <div class="col-12 col-lg-6" id="insert_review_space">
+                    <aside class="bg-white w-75 mx-auto text-center p-3 rounded-5 h-100">
                         <p class="text-center fs-4"> Vuoi aggiungere una recensione ?</p>
                         <form id="review_form" action="./scripts/review_insert_script.php" method="post">
                             <label for="restaurant" class="form-label"> Ristorante: </label>
@@ -298,8 +298,8 @@
                     </aside>
                 </div>
             </div>
-            <hr>
         </div>
+        <hr>
         <div id="review_list_space" class="w-75 mx-auto">
             <form action="./scripts/delete_review.php" method="post" >
 
@@ -345,7 +345,7 @@
                                 ?>
                             </table>
                             <div class="text-center">
-                                <button id="delete_review_button" class="btn btn-secondary d-block mx-auto" type="submit" disabled>
+                                <button id="delete_review_button" class="btn btn-secondary d-block mx-auto fs-5" type="submit" disabled>
                                     <span><i class="bi bi-trash3-fill"></i></span>
                                     Elimina
                                 </button> <br>

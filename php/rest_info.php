@@ -51,11 +51,63 @@
             crossorigin=""/>
     </head>
 
-    <body id="restaurant_info_page" onload="showMap('rest_map' ,<?php echo $info_ristorante['latitudine'] ?>, <?php echo $info_ristorante['longitudine'] ?>)">
+    <body id="restaurant_info_page" class="has_footer" onload="showMap('rest_map' ,<?php echo $info_ristorante['latitudine'] ?>, <?php echo $info_ristorante['longitudine'] ?>)">
         
-        <header class="d-flex align-items-center justify-content-center bg-warning">
+        <!--<header class="d-flex align-items-center justify-content-center bg-warning">
             <span><img id="icon" src="../images/logo.png" alt="risto&rece" width="96px" class="d-block mx-auto"></span>
             <h1 class="home_title jaini text-center"> RISTO&RECE </h1>
+        </header>-->
+
+        <header class="w-100 bg-warning">
+            <div class="container">
+                <nav class="navbar navbar-expand-lg sticky-top">
+                    <div class="container-fluid fs-5">
+                        <a class="navbar-brand jaini text-center" href="../pages/website_intro.html">
+                            <span style="font-size: 3rem;">
+                                <img src="../images/logo.png" alt="risto&rece" width="96px"
+                                class="d-inline-block align-text-center">
+                            RISTO&RECE </span>
+                        </a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse ps-3" id="navbarNav">
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="../pages/website_intro.html">Homepage</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="#">Area Personale</a>
+                                </li>
+                                
+                            </ul>
+                            <div class="ms-auto" role="search">
+                                <div class="profile_elements">
+                                    <a class="nav-link" href="profile.php">
+                                        <span class="d-flex align-items-center"></span>
+                                            <i class="bi bi-person-fill" style="font-size: 3rem;" id="profile_icon"></i>
+                                        </span>
+                                    </a>
+                                
+                                    <!--<button id="logout_button" type="submit" class="w-25 btn btn-danger fw-bold fs-5 d-block mx-auto" onclick="show('logout-box', 'flex'), disable_scroll()"> LOGOUT </button>-->
+                                    <!-- From Uiverse.io by vinodjangid07 -->
+                                    <button id="logout_button" class="Btn mx-auto" onclick="show('logout-box', 'flex'), disable_scroll()">
+                                        <div class="sign">
+                                            <svg viewBox="0 0 512 512">
+                                                <path
+                                                    d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z">
+                                                </path>
+                                            </svg>
+                                        </div>
+                                        <div class="text">Logout</div>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
         </header>
 
 
@@ -155,9 +207,11 @@
         <!--MIO SCRIPT-->
         <script src="../javascript/map.js"></script>
         <script src="../javascript/script.js"></script>
+        <script src="../javascript/footer.js"></script>
         <script>
             setAverage(<?php echo $avg ?>);
         </script>
+
     </body>
 
 </html>
