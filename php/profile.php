@@ -63,7 +63,7 @@
                                 
                             </ul>
                             <div class="ms-auto" role="search">
-                                <div class="profile_elements">
+                                <div class="profile_elements" id="nav_right">
                                     <a class="nav-link active" aria-current="page" href="#">
                                         <span class="d-flex align-items-center"></span>
                                             <i class="bi bi-person-fill" style="font-size: 3rem; opacity: 1 !important;" id="profile_icon"></i>
@@ -71,17 +71,6 @@
                                     </a>
                                 
                                     <!--<button id="logout_button" type="submit" class="w-25 btn btn-danger fw-bold fs-5 d-block mx-auto" onclick="show('logout-box', 'flex'), disable_scroll()"> LOGOUT </button>-->
-                                    <!-- From Uiverse.io by vinodjangid07 -->
-                                    <button id="logout_button" class="Btn mx-auto" onclick="show('logout-box', 'flex'), disable_scroll()">
-                                        <div class="sign">
-                                            <svg viewBox="0 0 512 512">
-                                                <path
-                                                    d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z">
-                                                </path>
-                                            </svg>
-                                        </div>
-                                        <div class="text">Logout</div>
-                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -140,24 +129,12 @@
         </div>
 
         <!--finestra di LOGOUT (si apre al click del pulsante prima)-->
-        <div id="logout-box" class="d-none">
-            <div class="logout-content">
-                <h2> Sei sicuro di voler effettuare la disconnessione? </h2>
-                <h5> Sarà necessario ripetere l'accesso per poter tornare a questa pagina </h5>
-                <div class="buttons">
-                    <form action="./scripts/logout_script.php" method="post">
-                        <button id="confirm-logout" type="submit" class="btn btn-danger"
-                            onclick="hide('logout-box'), enable_scroll()">CONFERMA</button>
-                        <button id="cancel-logout" type="button" class="btn btn-outline-danger"
-                            onclick="hide('logout-box'), enable_scroll()">ANNULLA</button>
-                    </form>
-                </div>
-            </div>
-        </div>
+        <div id="logout-box" class="d-none"></div>
 
 
         <script src="../javascript/script.js"></script>
         <script src="../javascript/footer.js"></script>
+        <script src="../javascript/logout.js"></script>
     </body>
 
 </html>

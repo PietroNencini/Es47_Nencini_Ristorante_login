@@ -11,4 +11,5 @@
 9: Password uguale alla precedente o non valida
 -2: recensione inserita con successo (da distinguere rispetto allo 0)
 -3: ristorante inserito con successo (//)
--4: Password modificata con successo
+-4: Password modificata con successo (//)
+-5: Recensione eliminata con successo (//)

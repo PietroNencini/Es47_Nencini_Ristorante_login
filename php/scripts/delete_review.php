@@ -22,6 +22,7 @@
     foreach($to_delete as $id) {
         $delete = "DELETE FROM recensione WHERE id_recensione = $id";
         if($conn->query($delete)) {
+            $_SESSION["error_code"] = -5;
             if($conn->affected_rows > 0)
                 $_SESSION["deleted_reviews"]++;
         } else {

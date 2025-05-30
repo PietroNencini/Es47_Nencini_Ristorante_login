@@ -8,7 +8,7 @@ function createFooter() {
     footer.className = "bg-warning py-4";
     
     let container = document.createElement("div");
-    container.className = "container text-center text-md-start";
+    container.className = "container text-center";
     
     let row = document.createElement("div");
     row.className = "row";
