@@ -1,3 +1,21 @@
+
+
+<?php
+
+    //* ATTENZIONE: Questa pagina inizialmente non conteneva codice PHP, ma in seguito a modifiche necessarie apportate al dito è stato necessario cambiare il formato
+    //* Per non causare problemi tra i percorsi e rendere più semplice la gestione dei file, la pagina risulta comunque tra quelle HTML
+    session_start();
+
+    include "../php/connection.php";
+
+    if($result = $conn->query("SELECT count(*) as total FROM utente WHERE is_admin = 0")) {
+        $total_users = $result->fetch_assoc()["total"]; 
+    } else {
+        header("Location: error.html");
+        exit;
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="it">
 
@@ -5,7 +23,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login effettuato</title>
+    <title>Il nostro servizio</title>
     <!--* FAVICON -->
     <link rel="shortcut icon" href="../images/favicons/user.png" type="image/x-icon">
     <!--* BOOTSTRAP-->
@@ -24,11 +42,11 @@
         <div class="container">
             <nav class="navbar navbar-expand-lg sticky-top">
                 <div class="container-fluid fs-5">
-                    <a class="navbar-brand jaini text-center" href="../pages/website_intro.html">
+                    <a class="navbar-brand jaini text-center" href="#">
                         <span style="font-size: 3rem;">
-                            <img src="../images/logo.png" alt="risto&rece" width="96px"
+                            <img src="../images/icons/R&R_definitivo.png" alt="risto&rece" width="96px"
                             class="d-inline-block align-text-center">
-                        RISTO&RECE </span>
+                        <span class="ms-2">RISTO&RECE </span></span>
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,21 +55,43 @@
                     <div class="collapse navbar-collapse ps-3" id="navbarNav">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="../pages/website_intro.html">Homepage</a>
+                                <a class="nav-link active" aria-current="page" href="#">Homepage</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="../php/welcome.php">Area Personale</a>
+                                <a class="nav-link <?php if(!isset($_SESSION["session_user"])) echo "disabled"?>" href="<?php echo isset($_SESSION["session_user"]) ? "../php/welcome.php" : "#" ?>" onclick="disable_scroll()">
+                                    Area Personale</a>
                             </li>
                             
                         </ul>
                         <div class="ms-auto" role="search">
                             <div class="profile_elements" id="nav_right">
+                                <?php
+                                    if(isset($_SESSION["session_user"])) {
+                                        echo "<a class='nav-link' href='../php/profile.php'>
+                                            <span class='d-flex align-items-center'></span>
+                                                <i class='bi bi-person-fill' style='font-size: 3rem;' id='profile_icon'></i>
+                                            </span>
+                                            </a>";
+                                    } else {
+                                        echo "<a class='nav-link w-50' href='../php/registration.php'>
+                                            <button class='btn btn-primary fw-bold'>
+                                                REGISTRATI
+                                            </button>
+                                            </a>
+                                            <a class='nav-link w-50' href='../'>
+                                                <button class='btn btn-success fw-bold'>
+                                                    ACCEDI
+                                                </button>
+                                            </a>";
+                                    }
+                                ?>
+                                <!--
                                 <a class="nav-link" href="../php/profile.php">
                                     <span class="d-flex align-items-center"></span>
                                         <i class="bi bi-person-fill" style="font-size: 3rem;" id="profile_icon"></i>
                                     </span>
                                 </a>
-                            
+                                -->
                                 <!--<button id="logout_button" type="submit" class="w-25 btn btn-danger fw-bold fs-5 d-block mx-auto" onclick="show('logout-box', 'flex'), disable_scroll()"> LOGOUT </button>-->
                             </div>
                         </div>
@@ -64,10 +104,10 @@
     <div class="content">
         <div class="w-75 mx-auto bg-secondary-subtle p-5 rounded-5" id="informazioni">
             <div class="row">
-                <div class="col col-md-6">
-                    <p class="fs-5"> Risto&Rece è il nostro servizio che permette di lasciare recensioni nei tuoi ristoranti preferiti </p>
-                    <p> Ma cosa ci fai ancora qui nella Homepage???? Moviti a mette' le recensioni</p>
-
+                <div class="col col-md-6 fs-5">
+                    <p> Risto&Rece è il nostro servizio che permette di lasciare recensioni nei tuoi ristoranti preferiti </p>
+                    <p> Ogni utente può lasciare una recensione e visualizzare le recensioni dei ristoranti </p>
+                    <p> <b><?php echo $total_users ?></b> utenti si sono già uniti alla nostra community, fallo anche tu!</p>
                 </div>
                 <div class="col col-md-6">
                     <img src="../images/icons/R&R.png" width="256px" height="256px" alt="logo" class="d-block mx-auto">
@@ -82,7 +122,11 @@
 
     <script src="../javascript/script.js"> </script>
     <script src="../javascript/footer.js"> </script>
-    <script src="../javascript/logout.js"></script>
+    <?php
+        if(isset($_SESSION["session_user"])) {
+            echo "<script src='../javascript/logout.js'></script>";
+        }
+    ?>
 </body>
 
 </html>

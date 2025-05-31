@@ -11,7 +11,7 @@
 
     if(!isset($_SESSION["deleted_reviews"]))
         $_SESSION["deleted_reviews"] = 0;
-
+    
     $to_delete = $_POST["deleteRev"];
 
     if(!isset($to_delete)) {

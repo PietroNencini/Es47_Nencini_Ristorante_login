@@ -58,11 +58,11 @@
         <div class="container">
             <nav class="navbar navbar-expand-lg sticky-top">
                 <div class="container-fluid fs-5">
-                    <a class="navbar-brand jaini text-center" href="../pages/website_intro.html">
+                    <a class="navbar-brand jaini text-center" href="../pages/website_intro.php">
                         <span style="font-size: 3rem;">
-                            <img src="../images/logo.png" alt="risto&rece" width="96px"
+                            <img src="../images/icons/R&R_definitivo.png" alt="risto&rece" width="96px"
                             class="d-inline-block align-text-center">
-                        RISTO&RECE </span>
+                        <span class="ms-2">RISTO&RECE </span> </span>
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -71,7 +71,7 @@
                     <div class="collapse navbar-collapse ps-3" id="navbarNav">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link" href="../pages/website_intro.html">Homepage</a>
+                                <a class="nav-link" href="../pages/website_intro.php">Homepage</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="#">Area Personale</a>
@@ -293,7 +293,7 @@
                                     $rev_query = "SELECT RT.nome AS Ristorante, RT.Indirizzo, RV.voto as Valutazione, RV.data_rec as Data, RV.id_recensione as ID  FROM recensione RV INNER JOIN ristorante RT ON RV.id_ristorante = RT.id_ristorante WHERE RV.id_utente = $required_id";
                                     $rev_result = $rev_result = $conn->query(query: $rev_query);
                                     if ($rev_result) {
-                                        $num_rec_output = "<p class='fs-4 text-center'> Recensioni totali: $rev_result->num_rows </p>";
+                                        $num_rec_output = "<p class='fs-4 text-center my-1'> Recensioni totali: $rev_result->num_rows </p>";
                                         if ($rev_result->num_rows > 0) {
                                             echo "<thead class='table-light'> <tr class='table-warning-subtle'>";
                                             while ($field = $rev_result->fetch_field()) {
@@ -310,9 +310,9 @@
                                                         echo "<td> $value </td>";
                                                     }
                                                 }
-                                                echo "<td> <div class='form-check mx-auto'>
+                                                echo "<td class='text-center'> 
                                                         <input name='deleteRev[]' class='form-check-input del_rev' type='checkbox' value='$row[ID]' onclick='manageDeleteButton()'>
-                                                    </div> </td>";
+                                                    </td>";
                                                 echo "</tr>";
                                             }
                                             echo "<tr> <td colspan='$rev_result->field_count'> $num_rec_output </td> </tr> </tbody>";

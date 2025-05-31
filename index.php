@@ -15,7 +15,7 @@ if (!isset($_SESSION["error_code"]))
     <!--* TITOLO DELLA PAGINA-->
     <title>Risto & rece</title>
     <!--* FAVICON-->
-    <link rel="icon" type="image/x-icon" href="./images/logo.png">
+    <link rel="icon" type="image/x-icon" href="./images/icons/R&R_definitivo.png">
     <!--* BOOTSTRAP-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -27,9 +27,58 @@ if (!isset($_SESSION["error_code"]))
 
     
     
-    <header class="d-flex align-items-center justify-content-center bg-warning">
-        <span><img id="icon" src="./images/logo.png" alt="risto&rece" width=96px" class="d-block mx-auto"></span>
+    <!--<header class="d-flex align-items-center justify-content-center bg-warning">
+        <span><img id="icon" src="./images/icons/R&R_definitivo.png" alt="risto&rece" width=96px" class="d-block mx-auto"></span>
         <h1 class="home_title jaini text-center"> RISTO&RECE </h1>
+    </header>-->
+
+
+    <header class="w-100 bg-warning">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg sticky-top">
+                <div class="container-fluid fs-5">
+                    <a class="navbar-brand jaini text-center" href="./pages/website_intro.php">
+                        <span style="font-size: 3rem;">
+                            <img src="./images/icons/R&R_definitivo.png" alt="risto&rece" width="96px"
+                            class="d-inline-block align-text-center">
+                        <span class="ms-2">RISTO&RECE </span></span>
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse ps-3" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="./pages/website_intro.php">Homepage</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link disabled" href="../php/welcome.php">Area Personale</a>
+                            </li>
+                            
+                        </ul>
+                        <div class="ms-auto" role="search">
+                            <div class="profile_elements" id="nav_right">
+                                <a class="nav-link w-50" href="./php/registration.php">
+                                    <button class="btn btn-primary fw-bold">
+                                        REGISTRATI
+                                    </button>
+                                </a>
+                            
+                            
+                                <!--<a class="nav-link" href="../php/profile.php">
+                                    <span class="d-flex align-items-center"></span>
+                                        <i class="bi bi-person-fill" style="font-size: 3rem;" id="profile_icon"></i>
+                                    </span>
+                                </a>-->
+                            
+                                <!--<button id="logout_button" type="submit" class="w-25 btn btn-danger fw-bold fs-5 d-block mx-auto" onclick="show('logout-box', 'flex'), disable_scroll()"> LOGOUT </button>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
     </header>
     
 

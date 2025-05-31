@@ -1,6 +1,16 @@
 document.addEventListener("DOMContentLoaded", function () {
+    let currentPath = window.location.pathname;
+    console.log(currentPath);
+    
+    // Trova la profondità della pagina rispetto alla root visibile in URL
+    let depth = currentPath.split("/").length - 4; 
+    console.log(depth);
+
+    // Risali di "depth" livelli 
+    let path = "../".repeat(depth) + "php/scripts/logout_script.php"; 
+    console.log(path);
     createLogoutButton();
-    createBox();
+    createBox(path);
 })
 
 /** 
@@ -17,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
             </div>
         </div>-->
 */
-function createBox() {
+function createBox(path) {
     // Recupera il div con id logout-box
     let logoutBox = document.getElementById("logout-box");
 
@@ -44,7 +54,7 @@ function createBox() {
 
     // Form
     let form = document.createElement("form");
-    form.action = "./scripts/logout_script.php";
+    form.action = path;
     form.method = "post";
 
     // Pulsante di conferma logout

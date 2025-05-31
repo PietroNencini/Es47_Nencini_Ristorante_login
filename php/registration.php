@@ -16,16 +16,17 @@
     <!--* TITOLO DELLA PAGINA-->
     <title>Risto & rece</title>
     <!--* FAVICON-->
-    <link rel="icon" type="image/x-icon" href="./images/logo.png">
+    <link rel="icon" type="image/x-icon" href="./images/icons/R&R_definitivo.png">
     <!--* BOOTSTRAP-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <!--* CSS PERSONALE-->
     <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body class="log_page has_footer">
-    <header class="d-flex align-items-center justify-content-center bg-warning">
-        <span><img id="icon" src="../images/logo.png" alt="risto&rece" width=96px" class="d-block mx-auto"></span>
-        <h1 class="home_title jaini text-center"> RISTO&RECE </h1>
+
+    <header class="p-3 d-flex align-items-center justify-content-center bg-warning">
+        <span><img id="icon" src="../images/icons/R&R_definitivo.png" alt="risto&rece" width=96px" class="d-block mx-auto"></span>
+        <h1 class="home_title jaini text-center ms-3"> RISTO&RECE </h1>
     </header>
 
     <div id="home_form_container" class="w-75 mx-auto bg-secondary-subtle p-4 my-4">

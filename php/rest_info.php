@@ -54,7 +54,7 @@
     <body id="restaurant_info_page" class="has_footer" onload="showMap('rest_map' ,<?php echo $info_ristorante['latitudine'] ?>, <?php echo $info_ristorante['longitudine'] ?>)">
         
         <!--<header class="d-flex align-items-center justify-content-center bg-warning">
-            <span><img id="icon" src="../images/logo.png" alt="risto&rece" width="96px" class="d-block mx-auto"></span>
+            <span><img id="icon" src="../images/icons/R&R_definitivo.png" alt="risto&rece" width="96px" class="d-block mx-auto"></span>
             <h1 class="home_title jaini text-center"> RISTO&RECE </h1>
         </header>-->
 
@@ -62,11 +62,11 @@
             <div class="container">
                 <nav class="navbar navbar-expand-lg sticky-top">
                     <div class="container-fluid fs-5">
-                        <a class="navbar-brand jaini text-center" href="../pages/website_intro.html">
+                        <a class="navbar-brand jaini text-center" href="../pages/website_intro.php">
                             <span style="font-size: 3rem;">
-                                <img src="../images/logo.png" alt="risto&rece" width="96px"
+                                <img src="../images/icons/R&R_definitivo.png" alt="risto&rece" width="96px"
                                 class="d-inline-block align-text-center">
-                            RISTO&RECE </span>
+                            <span class="ms-2">RISTO&RECE </span> </span>
                         </a>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -75,7 +75,7 @@
                         <div class="collapse navbar-collapse ps-3" id="navbarNav">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="../pages/website_intro.html">Homepage</a>
+                                    <a class="nav-link" href="../pages/website_intro.php">Homepage</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link active" aria-current="page" href="#">Area Personale</a>

@@ -42,11 +42,11 @@
             <div class="container">
                 <nav class="navbar navbar-expand-lg sticky-top">
                     <div class="container-fluid fs-5">
-                        <a class="navbar-brand jaini text-center" href="../pages/website_intro.html">
+                        <a class="navbar-brand jaini text-center" href="../pages/website_intro.php">
                             <span style="font-size: 3rem;">
-                                <img src="../images/logo.png" alt="risto&rece" width="96px"
+                                <img src="../images/icons/R&R_definitivo.png" alt="risto&rece" width="96px"
                                 class="d-inline-block align-text-center">
-                            RISTO&RECE </span>
+                            <span class="ms-2">RISTO&RECE </span> </span>
                         </a>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,7 +55,7 @@
                         <div class="collapse navbar-collapse ps-3" id="navbarNav">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="../pages/website_intro.html">Homepage</a>
+                                    <a class="nav-link" href="../pages/website_intro.php">Homepage</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="welcome.php">Area Personale</a>
@@ -88,13 +88,13 @@
                     <ul id="user_info" style="list-style-type: none;">
                         <?php
                         $query = "SELECT U.username as USERNAME, U.nome as NOME, U.cognome as COGNOME, U.email AS EMAIL, date(U.data_reg) as REGISTRAZIONE, count(R.id_utente) as RECENSIONI  
-                                FROM utente U INNER JOIN recensione R ON U.id_cliente = R.id_utente WHERE U.username = '$logged_user'";
+                                FROM utente U LEFT JOIN recensione R ON U.id_cliente = R.id_utente WHERE U.username = '$logged_user'";
                         $query_last_rev = "SELECT date(data_rec) as ULTIMA_RECENSIONE 
                                 FROM recensione WHERE id_utente = (SELECT id_utente FROM utente WHERE username = '$logged_user') 
                                 ORDER BY data_rec DESC LIMIT 1";
                         if ($result = $conn->query(query: $query)) {
                             if($result_last_rev = $conn->query(query: $query_last_rev)) {
-                                if ($result->num_rows > 0 && $result_last_rev->num_rows > 0) {
+                                if ($result->num_rows > 0) {
                                     while ($row = $result->fetch_assoc()) {
                                         foreach ($row as $key => $value) {
                                             $field_name = $key == "REGISTRAZIONE" ? "MEMBRO DAL" : $key;
