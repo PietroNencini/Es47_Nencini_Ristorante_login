@@ -109,7 +109,7 @@ Ogni utente, oltre alle credenziali di accesso, deve indicare nome, cognome e em
             Masterchef
         </td>
         <td>
-            Cucina
+            Cucina18
         </td>
     </tr>
 </table>

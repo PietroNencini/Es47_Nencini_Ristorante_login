@@ -9,6 +9,7 @@
 7: Recensione già inserita per quel dato ristorante
 8: ristorante già presente o non aggiungibile
 9: Password uguale alla precedente o non valida
+10: Uno o più campi di inserimento non rispettano il formato richiesto
 -2: recensione inserita con successo (da distinguere rispetto allo 0)
 -3: ristorante inserito con successo (//)
 -4: Password modificata con successo (//)

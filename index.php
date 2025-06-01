@@ -87,8 +87,7 @@ if (!isset($_SESSION["error_code"]))
             <div id="home_form_container" class="w-75 mx-auto bg-secondary-subtle p-4">
 
                 <p class="text-center fs-5"> Inserisci le credenziali per accedere alle tue risorse e sfruttare le funzionalità del nostro servizio </p>
-
-                <div id="form_inside" class="w-50 bg-white  rounded-3 p-3 mx-auto my-5">
+                <div id="form_inside" class="w-50 bg-white  rounded-3 p-3 mx-auto mt-2 mb-5">
                     <form id="login_form" action="php/scripts/login_script.php" method="post">
                         <label for="username" class="form-label">Nome utente</label>
                         <input type="text" name="username" id="username" class="form_input form-control" minlength="4"
@@ -108,6 +107,9 @@ if (!isset($_SESSION["error_code"]))
                                     break;
                                 case 2:
                                     $output = "Password errata";
+                                    break;
+                                case 10:
+                                    $output = "Uno o più campi di inserimento non rispettano il formato richiesto";
                                     break;
                                 default:
                                     $error = false;

@@ -3,6 +3,7 @@ const DEFAULT_ZOOM = 17
 let maps = {};
 let markerGroup = {};
 
+//todo : Utilizzare al posto del PHP per prendere le coordinate
 function getCoordinates(id_ristorante) {
     fetch("../php/scripts/get_coordinates.php?id_ristorante=" + id_ristorante, {
         method: GET,
@@ -14,7 +15,7 @@ function getCoordinates(id_ristorante) {
 }
 
 function showMap(mapId, latit, longit, marker = true, clickable = false){  
-    console.log(mapId);
+    console.log("ID mappa: " + mapId);
     if(!maps[mapId]) {
         maps[mapId] = {
             mapInstance: L.map(mapId),

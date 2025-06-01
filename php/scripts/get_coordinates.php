@@ -3,7 +3,11 @@
     include "../connection.php";
 
     $idRistorante = $_GET['id_ristorante'];
-    if($result = $conn->query("SELECT latitudine as lat, longitudine as lon FROM ristorante WHERE id_ristorante = $idRistorante")) {
+
+    $stmt = $conn->prepare("SELECT latitudine as lat, longitudine as lon FROM ristorante WHERE id_ristorante = ?");
+    $stmt->bind_param("i", $idRistorante);
+
+    if($stmt->execute()) {
 
         $result = $result->fetch_assoc();
 

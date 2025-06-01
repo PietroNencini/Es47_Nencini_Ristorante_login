@@ -11,7 +11,7 @@
 
     if(!isset($_SESSION["deleted_reviews"]))
         $_SESSION["deleted_reviews"] = 0;
-    
+
     $to_delete = $_POST["deleteRev"];
 
     if(!isset($to_delete)) {
@@ -19,9 +19,12 @@
         exit;
     }
     
+
+    $stmt = $conn->prepare("DELETE FROM recensione WHERE id_recensione = ?");
+
     foreach($to_delete as $id) {
-        $delete = "DELETE FROM recensione WHERE id_recensione = $id";
-        if($conn->query($delete)) {
+        $stmt->bind_param("i", $id);
+        if($stmt->execute()) {
             $_SESSION["error_code"] = -5;
             if($conn->affected_rows > 0)
                 $_SESSION["deleted_reviews"]++;

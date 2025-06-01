@@ -8,15 +8,14 @@ function createFooter() {
     footer.className = "bg-warning py-4";
     
     let container = document.createElement("div");
-    container.className = "container text-center";
+    container.className = "text-center";
     
     let row = document.createElement("div");
     row.className = "row";
-    
-    let col1 = createFooterColumn("Chi siamo", "Informazioni sull'azienda", "🛈");
-    let col2 = createFooterColumn("Contatti", "Email e telefono", "📞");
-    let col3 = createFooterColumn("Privacy", "Politiche sui dati", "🔒");
-    let col4 = createFooterColumn("Seguici", "Social network", "🌍");
+    let col1 = createFooterColumn("Chi siamo", "C'è scritto tutto sulla Homepage, niente da vedere qui", "🛈");
+    let col2 = createFooterColumn("Contatti", "Sviluppatore: bobdev@gmail.com <br> Amministratore: ristorece.admin@info.it", "📞");
+    let col3 = createFooterColumn("Privacy", "Garantita la sicurezza sulle informazioni utente <br> Per informazioni chiedere al vicino di casa", "🔒");
+    let col4 = createFooterColumn("Seguici", "SCHERZO! Il budget non permette ancora di avere una nostra pagina sui social", "🌍");
 
     row.appendChild(col1);
     row.appendChild(col2);
@@ -36,7 +35,7 @@ function createFooterColumn(title, text, icon) {
     heading.innerHTML = `${icon} ${title}`;
 
     let paragraph = document.createElement("p");
-    paragraph.textContent = text;
+    paragraph.innerHTML = text;
 
     col.appendChild(heading);
     col.appendChild(paragraph);
