@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Giu 01, 2025 alle 16:27
+-- Creato il: Mag 21, 2025 alle 20:02
 -- Versione del server: 10.4.32-MariaDB
 -- Versione PHP: 8.2.12
 
@@ -49,6 +49,7 @@ INSERT INTO `recensione` (`id_recensione`, `voto`, `data_rec`, `id_utente`, `id_
 (7, 2, '2025-04-25 17:57:07', 1, 6),
 (8, 5, '2025-04-25 17:57:07', 5, 5),
 (9, 4, '2025-05-03 08:58:01', 1, 10),
+(10, 1, '2025-05-20 15:44:22', 1, 9),
 (11, 2, '2025-05-21 17:01:50', 2, 3),
 (12, 1, '2025-05-21 17:12:22', 2, 9),
 (13, 5, '2025-05-21 17:40:41', 8, 4),
@@ -59,27 +60,12 @@ INSERT INTO `recensione` (`id_recensione`, `voto`, `data_rec`, `id_utente`, `id_
 (18, 1, '2025-05-21 17:54:53', 9, 3),
 (19, 1, '2025-05-21 17:54:58', 9, 4),
 (20, 5, '2025-05-21 17:55:02', 9, 9),
+(21, 4, '2025-05-21 17:56:08', 11, 1),
+(22, 5, '2025-05-21 17:56:11', 11, 2),
+(23, 4, '2025-05-21 17:56:23', 11, 4),
 (24, 1, '2025-05-21 17:57:22', 12, 7),
 (25, 4, '2025-05-21 17:57:26', 12, 10),
-(26, 3, '2025-05-21 17:57:29', 12, 6),
-(34, 5, '2025-06-01 13:10:32', 15, 5),
-(35, 4, '2025-06-01 13:10:40', 15, 15),
-(36, 3, '2025-06-01 13:11:09', 10, 2),
-(37, 2, '2025-06-01 13:11:12', 10, 14),
-(38, 4, '2025-06-01 13:11:17', 10, 7),
-(39, 4, '2025-06-01 13:26:01', 7, 8),
-(40, 2, '2025-06-01 13:26:04', 7, 5),
-(41, 5, '2025-06-01 13:26:07', 7, 2),
-(42, 4, '2025-06-01 13:26:11', 7, 15),
-(43, 3, '2025-06-01 13:26:19', 7, 4),
-(44, 5, '2025-06-01 13:26:22', 7, 1),
-(45, 1, '2025-06-01 13:26:27', 7, 12),
-(46, 4, '2025-06-01 13:26:31', 7, 14),
-(47, 5, '2025-06-01 13:26:33', 7, 13),
-(48, 1, '2025-06-01 13:26:38', 7, 6),
-(49, 1, '2025-06-01 13:26:41', 7, 7),
-(50, 1, '2025-06-01 13:26:52', 7, 9),
-(51, 1, '2025-06-01 13:26:55', 7, 10);
+(26, 3, '2025-05-21 17:57:29', 12, 6);
 
 -- --------------------------------------------------------
 
@@ -108,13 +94,10 @@ INSERT INTO `ristorante` (`id_ristorante`, `nome`, `indirizzo`, `citta`, `latitu
 (5, 'I\'Cantuccio', 'Via Angelo Gatti, 3/B', 'Borgo S. Lorenzo', 44.0038586, 11.4289982),
 (6, 'Da Bertone', 'Via XXIV Maggio 60', 'Lastra a Signa', 43.7711397, 11.1091447),
 (7, 'L\'amorino', 'Piazza Luciano Manara 5/7', 'Scandicci', 43.7566392, 11.1878941),
-(8, 'La valle dei re', 'Piazza Piave 2', 'Scandicci', 43.7536852, 11.1885092),
+(8, 'La valle dei re', 'Piazza Piave 2', 'Scandicci', 43.7536633, 11.3870686),
 (9, 'La musica', 'Via Vecchia Pisana 108', 'Malmantile', 43.7457531, 11.0685361),
 (10, 'Il Rustico', 'Piazza Garibaldi, 2', 'Scarperia e San Piero', 43.9940724, 11.3546458),
-(12, 'La Bisboccina', 'Via Provinciale, 38', 'Scarperia e San Piero', 43.9617429, 11.3238335),
-(13, 'Omo Morto', 'Via del Giogo, 3', 'Scarperia e San Piero', 43.7800127, 11.1997685),
-(14, 'Pizzeria di Mattagnano', 'Frazione Gracchia, 94', 'Vicchio', 43.7800127, 11.1997685),
-(15, 'Duccio\'s Street Food', 'Viale Spartaco Lavagnini, 38A', 'Firenze', 43.7800127, 11.1997685);
+(12, 'La Bisboccina', 'Via Provinciale, 38', 'Scarperia e San Piero', 43.9617429, 11.3238335);
 
 -- --------------------------------------------------------
 
@@ -122,7 +105,7 @@ INSERT INTO `ristorante` (`id_ristorante`, `nome`, `indirizzo`, `citta`, `latitu
 -- Struttura della tabella `utente`
 --
 
-CREATE TABLE `utente` (
+CREATE TABLE `utente` (  
   `id_cliente` bigint(20) NOT NULL,
   `username` varchar(255) NOT NULL,
   `passwrd` varchar(255) NOT NULL,
@@ -138,7 +121,7 @@ CREATE TABLE `utente` (
 --
 
 INSERT INTO `utente` (`id_cliente`, `username`, `passwrd`, `nome`, `cognome`, `email`, `data_reg`, `is_admin`) VALUES
-(1, 'koala14', '799084b47528672dc31975dc32892cdbc0d6570825ccf84751c41db77c4adf1e', 'Ezio', 'Auditore', 'utente.affidabile@disperato.com', '2025-05-24 17:10:30', 0),
+(1, 'koala13', '2f73897cecf3a38974cad0743c269bd499b264f13f73262cfec771b61cc8a296', 'Ezio', 'Auditore', 'nencinipietro2006@gmail.com', '2025-05-21 16:41:31', 0),
 (2, 'Hermano', '62648d1b1678a8fd0e84f310dd12f4bb7834a670818cebdbcaa69130ac05d20e', 'Armando', 'Diaz', 'diazelgrande@yahoo.com', '2025-05-21 16:39:09', 0),
 (3, 'qwerty_pro', 'a3461f3df3269957ae40e173ebdae13bbf1de559c57ed1294b17594099f3f220', 'Rodrigo', 'Parigi', 'rodrithebest@gmail.com', '2025-05-21 16:39:32', 0),
 (4, 'tommipari', 'a95240c37239a94198a0b86dfb8a38fac46463919aa9bf41e10d16d1a957d197', 'Tommaso', 'Parigi', 'tommaso.parigi06@gmail.com', '2025-04-02 22:00:00', 0),
@@ -150,9 +133,7 @@ INSERT INTO `utente` (`id_cliente`, `username`, `passwrd`, `nome`, `cognome`, `e
 (10, 'LoStrigo23', 'e2f2a13f10e59042bb065a177e9d9bf53914f39477078f033eed904ae99ef4f5', 'Geralt', 'Di Rivia', 'geralt.rivia@strighitalia.com', '2025-05-21 16:53:08', 0),
 (11, 'Supercar', '5b88429ef44f4fd7391ea62048e8efa7766eade7d548a265d6f183ba71021d40', 'Peugeot', '206', 'mycar@cars.com', '2025-05-21 16:53:08', 0),
 (12, 'the_dark_side', '35f6fcf958ab8e3ba080eb72dd7b2155af5be5a75f393a56f31f1dba9018f336', 'Anakin', 'Skywalker', 'skywalker.anakin@jediorder.cor', '2025-05-21 17:01:02', 0),
-(13, 'Masterchef', '461873136355e02ef3c5dc1a4184da84525199874552e24234a747a5b1132a5a', 'Antonino', 'Cannavacciuolo', 'anto.canna@cucineitaliane.com', '2025-06-01 13:18:28', 1),
-(14, 'Zeb89', '411e3d67a9f8b363ef42aa018babad3ee2e6b3058bf82927ebed94a04d788786', 'Kenneth', 'Caselli', 'piermentisfracellozzi@pietrosmusi.it', '2025-05-31 18:07:31', 0),
-(15, 'capitano_fiero', '95d78c4113d6002c7a9f43bbc454b17a8f074b3c87f4f477990d36951f231773', 'Jack', 'Sparrow', 'sparrow@perlanera.car', '2025-06-01 13:10:11', 0);
+(13, 'Masterchef', '03ec0f879a5c0336e4be0938332256a60c6d4200d76d859f3fc6434da229c6ca', 'Antonino', 'Cannavacciuolo', 'anto.canna@cucineitaliane.com', '2025-05-21 17:58:08', 1);
 
 --
 -- Indici per le tabelle scaricate
@@ -188,19 +169,19 @@ ALTER TABLE `utente`
 -- AUTO_INCREMENT per la tabella `recensione`
 --
 ALTER TABLE `recensione`
-  MODIFY `id_recensione` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id_recensione` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT per la tabella `ristorante`
 --
 ALTER TABLE `ristorante`
-  MODIFY `id_ristorante` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_ristorante` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT per la tabella `utente`
 --
 ALTER TABLE `utente`
-  MODIFY `id_cliente` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_cliente` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Limiti per le tabelle scaricate
