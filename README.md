@@ -1,6 +1,8 @@
 # RISTO&RECE #
 Si tratta di un progetto semplicissimo che mostra il funzionamento di un applicazione web con HTML, CSS e Javascript, a cui viene aggiunto PHP per collegarsi al database dove sono memorizzati i dati necessari all'applicazione per funzionare, e per generare contenuti dinamici nelle varie pagine
 
+Il sito web è adesso disponibile su: https://ristorece.altervista.org/
+
 ## FUNZIONALITÀ ##
 Le funzionalità offerte dall'applicazione per dimostrazione di come si realizzano in PHP sono in breve: <br>
 * Registrazione del proprio account
