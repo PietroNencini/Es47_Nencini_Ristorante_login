@@ -1,9 +1,33 @@
+const BASE_FOLDERS = ["php", "pages", "javascript", "css", "images"]
+
+function findBaseFolder(currentPath) {
+    let splitted = currentPath.split("/");
+    console.log(splitted);
+    for(let i = 0; i<splitted.length; i++) {
+        for(let j = 0; j<BASE_FOLDERS.length; j++) {
+            if(splitted[i] == BASE_FOLDERS[j]) {
+                console.log(BASE_FOLDERS[j]);
+                return  BASE_FOLDERS[j];
+            }
+        }
+    }
+    return -1;
+}
+
 document.addEventListener("DOMContentLoaded", function () {
     let currentPath = window.location.pathname;
     console.log(currentPath);
-    
+
+    let nearest_base_folder = findBaseFolder(currentPath);
+
+    // Se la cartella si base esiste esiste nel percorso, rimuovi tutto ciò che viene prima
+    let index = currentPath.indexOf(nearest_base_folder);
+    let cleanedPath = index !== -1 ? currentPath.slice(index) : currentPath;
+
+    console.log(cleanedPath);
+
     // Trova la profondità della pagina rispetto alla root visibile in URL
-    let depth = currentPath.split("/").length - 4; 
+    let depth = Math.max(0, cleanedPath.split("/").length -1);              // Si deve mettere -1 perché se no prende la stringa vuota "" che sta prima del primo slash 
     console.log(depth);
 
     // Risali di "depth" livelli 
@@ -11,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log(path);
     createLogoutButton();
     createBox(path);
-})
+});
 
 /** 
  * <!--<div class="logout-content">
