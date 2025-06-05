@@ -184,6 +184,19 @@ div.profile_elements {
     #rev_table_container {
         padding: 0 !important;
     }
+
+    .content {
+        min-height: auto;
+        margin: 2rem auto 2rem auto
+    }
+
+    #results_container {
+        width: 85% !important;
+    }
+
+    #insert_review_space select, #insert_review_space button {
+        width: 100% !important;
+    }
 }
 
 div.info_show {
