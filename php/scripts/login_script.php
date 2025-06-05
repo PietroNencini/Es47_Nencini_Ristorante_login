@@ -13,7 +13,7 @@
     $form_username = $_POST["username"];
     $form_password = $_POST["password"];
 
-    $data_query = "SELECT username, passwrd FROM UTENTE";
+    $data_query = "SELECT username, passwrd FROM utente";
 
     if($result = $conn->query($data_query)) {                            //? CONTROLLO 1: Sintassi query
         $user_found = false;   
@@ -36,5 +36,6 @@
         }
     } else {
         $_SESSION["error_code"] = 3;
-        header(header: "Location: ../../pages/error.html");
+        //header(header: "Location: ../../pages/error.html");
+        echo $conn->error;
     }

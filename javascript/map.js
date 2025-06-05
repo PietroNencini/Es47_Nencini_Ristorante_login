@@ -5,16 +5,21 @@ let markerGroup = {};
 
 //todo : Utilizzare al posto del PHP per prendere le coordinate
 function getCoordinates(id_ristorante) {
-    fetch("../php/scripts/get_coordinates.php?id_ristorante=" + id_ristorante, {
-        method: GET,
-    })
-    .then(response => response.json())
-    .then(() => {
-        return 
-    })
+    return fetch(`../php/scripts/get_coordinates.php?id_ristorante=${id_ristorante}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Errore nel recupero delle coordinate");
+            }
+            return response.json();
+        })
+        .then(data => [data.lat, data.lon]) // Restituisce direttamente l'array [lat, lon]
+        .catch(error => {
+            console.error("Errore nel recupero delle coordinate:", error);
+            return null; // Previene errori nel flusso del codice
+        });
 }
 
-function showMap(mapId, latit, longit, marker = true, clickable = false){  
+async function showMap(mapId, marker = true, clickable = false){  
     console.log("ID mappa: " + mapId);
     if(!maps[mapId]) {
         maps[mapId] = {
@@ -23,7 +28,11 @@ function showMap(mapId, latit, longit, marker = true, clickable = false){
         };
         markerGroup[mapId] = L.layerGroup().addTo(maps[mapId].mapInstance);
     }
-    maps[mapId].mapInstance.setView([latit, longit], DEFAULT_ZOOM);
+
+    let restaurant_id = document.getElementById("restaurant_info_page").getAttribute("data-map-id");
+    coords = await getCoordinates(restaurant_id);
+
+    maps[mapId].mapInstance.setView(coords, DEFAULT_ZOOM);
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 20,
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'

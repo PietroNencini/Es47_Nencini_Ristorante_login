@@ -51,7 +51,7 @@
             crossorigin=""/>
     </head>
 
-    <body id="restaurant_info_page" class="has_footer" onload="showMap('rest_map' ,<?php echo $info_ristorante['latitudine'] ?>, <?php echo $info_ristorante['longitudine'] ?>)">
+    <body id="restaurant_info_page" data-map-id="<?php echo $id_rest ?>" class="has_footer" onload="showMap('rest_map')">
         
         <!--<header class="d-flex align-items-center justify-content-center bg-warning">
             <span><img id="icon" src="../images/icons/R&R_definitivo.png" alt="risto&rece" width="96px" class="d-block mx-auto"></span>

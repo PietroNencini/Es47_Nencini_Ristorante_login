@@ -8,9 +8,7 @@
     $stmt->bind_param("i", $idRistorante);
 
     if($stmt->execute()) {
-
         $result = $result->fetch_assoc();
-
     } else {
         header("Location: ../../pages/error.html");
         exit;

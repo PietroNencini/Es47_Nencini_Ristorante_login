@@ -24,7 +24,8 @@
             exit;
         }
     } else {
-        header("Location: ../pages/error.html");
+        //header("Location: ../pages/error.html");
+        echo $conn->error;
         exit;
     }
 
